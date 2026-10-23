@@ -1,9 +1,11 @@
 # Politician-Info-Website
 
 ## Stack
-- HTML & CSS
-- JavaScript
-- PHP
+
+* HTML \& CSS
+* JavaScript
+* PHP
+* PostgreSQL
 
 ## About
 
