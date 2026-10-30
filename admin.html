@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+</head>
+<header>
+    <h2>Admin Dashboard</h2>
+    <p>Manage users, monitor activity, review reports, and handle escalations.</p>
+    <div id="metricsBoard">
+        <table>
+            <thead>
+                <th>Total Users</th>
+                <th>Open Tickets</th>
+                <th>Pending Escalations</th>
+                <th>Active Moderators</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td> <!--total users-->
+                    <td>0</td> <!--open tickets-->
+                    <td>0</td> <!--escalations-->
+                    <td>0</td> <!--moderators-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</header>
+<body>
+    <div id="adminUserManagement">
+        <h3>User Management</h3>
+        <button onclick="handleCreateUserClick()">+ Create User</button>
+        <input type="text" placeholder="Search users by name, email, or username">
+        <div id="userFilters">
+            <select>
+                <option value="" selected disabled >All Roles</option>
+            </select>
+            <select>
+                <option value="" selected disabled >Select Status</option>
+            </select>
+            <select>
+                <option value="" selected disabled >Select Time</option>
+            </select>
+            <button onclick="resetFilters()">Reset Filters</button>
+        </div>
+        <div id="userTable">
+            <!--Dynamically load data-->
+        </div>
+        <button onclick="filterPageBack()"><</button>
+        <button onclick="filterPageForward()">></button>
+    </div>
+    <div id="adminTechnicalReports">
+        <h3>Technical Reports</h3>
+        <button onclick="createNewTicket()">+ New Ticket</button>
+        <ul>
+            <li><a href="#">All Tickets</a></li>
+            <li><a href="#">Open</a></li>
+            <li><a href="#">In Progress</a></li>
+            <li><a href="#">Resolved</a></li>
+        </ul>
+        <div id="ticketTable">
+            <!--dynamically load-->
+        </div>
+        <button onclick="reportPageBack()"><</button>
+        <button onclick="reportPageForward()">></button>
+    </div>
+    <div id="moderatorEscalations">
+        <ul>
+            <li><button onclick="showPendingEscalations()">Pending</button></li>
+            <li><button onclick="showInReviewEscalations()">In Review</button></li>
+            <li><button onclick="showResolvedEscalations()">Resolved</button></li>
+        </ul>
+        <div id="escalationsTable">
+            <!--Dynamically load escalations data-->
+        </div>
+        <button onclick="escalationsPageBack()"><</button>
+        <button onclick="escalationsPageForward()">></button>
+    </div>
+    <div id="siteLogsAndActivity">
+        <select name="activityTypesDropdown">
+            <option value="" disabled selected>Activity Types</option>
+            <option value="test">test</option>
+        </select>
+        <select name="siteLogsTimeDropDown">
+            <option value="" disabled selected>Time</option>
+        </select>
+        <button onclick="refreshSiteLogs()">♺</button>
+        <div id="siteLogsTable">
+            <!--Dyncamically load site logs and activity data-->
+        </div>
+        <button onclick="siteLogsPageBack()"><</button>
+        <button onclick="siteLogsPageForward()">></button>
+    </div>
+</body>
+</html>
