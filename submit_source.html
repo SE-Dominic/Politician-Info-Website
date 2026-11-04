@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit a Source | LACE</title>
+  <script src="js/submit_source.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <a class="brand divided" href="home.html">
+      <span class="brand-logo filled">LACE</span>
+      <p class="brand-tag">Legislative Accountability<br>&amp; Constituent Engagement</p>
+    </a>
+
+    <nav class="main-nav">
+      <a href="home.html">Home</a>
+      <a href="legislator.html">Legislators</a>
+      <a href="bill_details.html">Bills</a>
+      <a href="#">Votes</a>
+      <a href="#">Issues</a>
+      <a href="#">Get Involved</a>
+    </nav>
+
+    <form class="header-search" action="#" method="get">
+      <label for="site-search" class="visually-hidden">Search</label>
+      <input type="search" id="site-search" name="q" placeholder="Search bills, legislators, or issues...">
+      <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+    </form>
+
+    <a href="profile.html" aria-label="My profile"><div class="avatar header-avatar"></div></a>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="home.html">Home</a> <span class="sep">&gt;</span> <span>Source Submission</span>
+  </nav>
+
+  <main class="layout-sidebar">
+
+    <div>
+      <h1 class="page-title">Submit a Source</h1>
+      <p class="page-intro">Help improve transparency and accuracy on LACE by submitting a reliable source that supports a bill, vote, or related claim.</p>
+
+      <section class="notice" id="review-notice">
+        <div class="info-icon" aria-hidden="true">i</div>
+        <div>
+          <h2>Pending Moderator Review</h2>
+          <p>All submitted sources are reviewed by LACE moderators before they are published on the site. You will be notified once your submission has been approved or if additional information is needed.</p>
+        </div>
+      </section>
+
+      <section class="notice success" id="success-notice" hidden>
+        <div class="info-icon" aria-hidden="true">&#10003;</div>
+        <div>
+          <h2>Source Submitted</h2>
+          <p>Thank you! Your source has been sent to LACE moderators for review. You will be notified once it has been approved or if additional information is needed.</p>
+          <p><a class="btn" href="bill_details.html">Back to Bill</a> <a class="btn" href="submit_source.html">Submit Another</a></p>
+        </div>
+      </section>
+
+      <section class="card form-card" id="source-form-card">
+        <form id="source-form" action="#" method="post" novalidate>
+
+          <div class="form-field">
+            <label for="linked-item">Linked Bill or Vote *</label>
+            <div class="input-icon">
+              <input type="search" id="linked-item" name="linked_item" placeholder="Search for a bill (e.g., HB 123) or select a vote..." required>
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+            </div>
+            <p class="hint">Link this source to a specific bill or vote on LACE.</p>
+            <p class="error-msg" hidden>Please link this source to a bill or vote.</p>
+          </div>
+
+          <div class="form-field">
+            <label for="source-type">Source Type *</label>
+            <select id="source-type" name="source_type" required>
+              <option value="">Select source type...</option>
+              <option value="news">News Article</option>
+              <option value="government">Government Document</option>
+              <option value="data">Official Data</option>
+              <option value="video">Official Video</option>
+            </select>
+            <p class="hint">Choose the category that best describes this source.</p>
+            <p class="error-msg" hidden>Please choose a source type.</p>
+          </div>
+
+          <div class="form-field">
+            <label for="cited-claim">Cited Claim *</label>
+            <textarea id="cited-claim" name="cited_claim" rows="4" placeholder="Paste or type the specific claim from LACE that this source supports..." required></textarea>
+            <p class="hint">Quote or summarize the claim this source verifies. Be as specific as possible.</p>
+            <p class="error-msg" hidden>Please enter the claim this source supports.</p>
+          </div>
+
+          <div class="form-field">
+            <label for="source-url">Source URL *</label>
+            <input type="url" id="source-url" name="source_url" placeholder="https://" required>
+            <p class="hint">Provide a direct link to the source (article, report, video, etc.).</p>
+            <p class="error-msg" hidden>Please enter a valid link starting with http:// or https://.</p>
+          </div>
+
+          <div class="form-field">
+            <label for="notes">Additional Notes (Optional)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Add any additional context, notes, or timestamps..."></textarea>
+            <p class="hint">Optional. Include any extra information that may help moderators review your submission.</p>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Submit Source</button>
+            <a class="btn btn-lg" href="bill_details.html" id="cancel-btn">Cancel</a>
+          </div>
+
+        </form>
+      </section>
+    </div>
+
+    <aside>
+      <section class="side-box">
+        <h2>Submission Guidelines</h2>
+        <ul>
+          <li>Submit accurate and reliable sources from credible, independent organizations.</li>
+          <li>Link to a specific bill, vote, or claim on LACE.</li>
+          <li>Include enough detail for moderators to verify the information.</li>
+          <li>Avoid partisan opinion pieces, blog posts, or unverified content.</li>
+          <li>All submissions are reviewed before being published.</li>
+        </ul>
+      </section>
+
+      <section class="side-box">
+        <h2>Acceptable Source Examples</h2>
+        <ul class="examples">
+          <li>
+            <span class="example-icon emoji" aria-hidden="true">&#128240;</span>
+            <div><strong>News Articles</strong>e.g., Reuters, AP, BBC, local news outlets</div>
+          </li>
+          <li>
+            <span class="example-icon emoji" aria-hidden="true">&#127963;</span>
+            <div><strong>Government Documents</strong>e.g., bill text, committee reports, hearing transcripts</div>
+          </li>
+          <li>
+            <span class="example-icon emoji" aria-hidden="true">&#128202;</span>
+            <div><strong>Official Data</strong>e.g., Census, BLS, CBO, state government data</div>
+          </li>
+          <li>
+            <span class="example-icon emoji" aria-hidden="true">&#9654;&#65039;</span>
+            <div><strong>Official Videos</strong>e.g., committee hearings, floor sessions (C-SPAN, state legislature channels)</div>
+          </li>
+        </ul>
+      </section>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="brand">
+      <span class="brand-logo">LACE</span>
+      <span>Legislative Accountability &amp; Constituent Engagement</span>
+    </div>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </nav>
+  </footer>
+
+</div>
+</body>
+</html>

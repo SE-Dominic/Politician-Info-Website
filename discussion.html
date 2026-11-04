@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HB 1234 Discussion | LACE</title>
+  <script src="js/discussion.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <a class="brand" href="home.html">
+      <span class="brand-logo">LACE</span>
+      <p class="brand-tag">Legislative Accountability<br>&amp; Constituent Engagement</p>
+    </a>
+
+    <nav class="main-nav">
+      <a href="home.html">Home</a>
+      <a href="bill_details.html">Bills</a>
+      <a href="legislator.html">Legislators</a>
+      <a href="#">Votes</a>
+      <a href="discussion.html" class="active">Discussion</a>
+      <a href="#">About</a>
+    </nav>
+
+    <form class="header-search" action="#" method="get">
+      <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+      <label for="site-search" class="visually-hidden">Search</label>
+      <input type="search" id="site-search" name="q" placeholder="Search bills, legislators, or topics...">
+    </form>
+
+    <a href="profile.html" aria-label="My profile"><div class="avatar header-avatar"></div></a>
+  </header>
+
+  <nav class="breadcrumb blue" aria-label="Breadcrumb">
+    <a href="home.html">Home</a> <span class="sep">&gt;</span>
+    <a href="bill_details.html">Bills</a> <span class="sep">&gt;</span>
+    <a href="bill_details.html">HB 1234</a> <span class="sep">&gt;</span>
+    <span class="current">Discussion</span>
+  </nav>
+
+  <main class="layout-sidebar">
+
+    <div>
+
+      <!-- Page heading -->
+      <section class="card discussion-head">
+        <div class="doc-icon">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2.5h8.5L19 7v14.5H6z"/><path d="M14.5 2.5V7H19"/><line x1="9" y1="11" x2="16" y2="11"/><line x1="9" y1="14" x2="16" y2="14"/><line x1="9" y1="17" x2="14" y2="17"/></svg>
+        </div>
+        <div>
+          <p class="eyebrow">DISCUSSION</p>
+          <h1>HB 1234 &ndash; Clean Energy Future Act</h1>
+          <p>Discuss this bill with other constituents. Share your perspectives, ask questions, and engage in respectful dialogue.</p>
+        </div>
+      </section>
+
+      <!-- New comment -->
+      <section class="card">
+        <div class="card-head">
+          <h2>Join the Discussion</h2>
+        </div>
+        <form class="composer" id="comment-form" action="#" method="post">
+          <div class="avatar lg"></div>
+          <div class="composer-body">
+            <label for="new-comment" class="visually-hidden">Your comment</label>
+            <textarea id="new-comment" name="comment" rows="4" maxlength="1000" placeholder="Share your thoughts..."></textarea>
+            <div class="composer-foot">
+              <span class="char-count" id="char-count">0/1000 characters</span>
+              <button type="submit" class="btn btn-primary">Post Comment</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Sort & filter -->
+      <div class="toolbar">
+        <label>Sort by:
+          <select id="sort-comments">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="liked">Most Liked</option>
+          </select>
+        </label>
+        <label>Filter:
+          <select id="filter-comments">
+            <option value="all">All Comments</option>
+            <option value="mine">My Comments</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Comment list -->
+      <div id="comment-list">
+
+        <article class="card comment-thread" data-time="2025-04-25T14:14" data-likes="24">
+          <div class="comment">
+            <div class="avatar"></div>
+            <div class="comment-body">
+              <div class="comment-head">
+                <strong>Jordan Kim</strong>
+                <span class="badge">Constituent</span>
+                <button type="button" class="like" aria-pressed="false"><span class="heart">&#9825;</span><span class="like-count">24</span></button>
+              </div>
+              <div class="comment-time">Apr 25, 2025 at 2:14 PM</div>
+              <p class="comment-text">I strongly support this bill. Investing in clean energy will create jobs in our state and reduce long-term costs for families. It's a necessary step toward a healthier, more sustainable future.</p>
+              <div class="comment-actions">
+                <button type="button" class="action" data-action="reply"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/></svg>Reply</button>
+                <button type="button" class="action" data-action="edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><line x1="14" y1="6" x2="18" y2="10"/></svg>Edit</button>
+                <button type="button" class="action" data-action="delete"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Delete</button>
+                <a class="action" href="report_issue.html"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Report</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="replies">
+            <article class="reply-card">
+              <div class="comment">
+                <div class="avatar"></div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <strong>Taylor Morgan</strong>
+                    <span class="badge">Constituent</span>
+                    <button type="button" class="like" aria-pressed="false"><span class="heart">&#9825;</span><span class="like-count">8</span></button>
+                  </div>
+                  <div class="comment-time">Apr 25, 2025 at 3:02 PM</div>
+                  <p class="comment-text">I agree! The job creation aspect is especially important for our region.</p>
+                  <div class="comment-actions">
+                    <button type="button" class="action" data-action="reply"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/></svg>Reply</button>
+                    <button type="button" class="action" data-action="edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><line x1="14" y1="6" x2="18" y2="10"/></svg>Edit</button>
+                    <button type="button" class="action" data-action="delete"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Delete</button>
+                    <a class="action" href="report_issue.html"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Report</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="replies">
+                <article class="reply-card">
+                  <div class="comment">
+                    <div class="avatar"></div>
+                    <div class="comment-body">
+                      <div class="comment-head">
+                        <strong>Casey Patel</strong>
+                        <span class="badge">Constituent</span>
+                        <button type="button" class="like" aria-pressed="false"><span class="heart">&#9825;</span><span class="like-count">5</span></button>
+                      </div>
+                      <div class="comment-time">Apr 25, 2025 at 4:18 PM</div>
+                      <p class="comment-text">Do you have a source for the job estimates? I'd love to read more about that.</p>
+                      <div class="comment-actions">
+                        <button type="button" class="action" data-action="reply"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/></svg>Reply</button>
+                        <button type="button" class="action" data-action="edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><line x1="14" y1="6" x2="18" y2="10"/></svg>Edit</button>
+                        <button type="button" class="action" data-action="delete"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Delete</button>
+                        <a class="action" href="report_issue.html"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Report</a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="card comment-thread" data-time="2025-04-25T13:37" data-likes="12">
+          <div class="comment">
+            <div class="avatar"></div>
+            <div class="comment-body">
+              <div class="comment-head">
+                <strong>Riley Chen</strong>
+                <span class="badge">Constituent</span>
+                <button type="button" class="like" aria-pressed="false"><span class="heart">&#9825;</span><span class="like-count">12</span></button>
+              </div>
+              <div class="comment-time">Apr 25, 2025 at 1:37 PM</div>
+              <p class="comment-text">I have some concerns about the potential impact on small businesses. While I support the goals, I think there needs to be more detail on how compliance costs will be handled.</p>
+              <div class="comment-actions">
+                <button type="button" class="action" data-action="reply"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/></svg>Reply</button>
+                <button type="button" class="action" data-action="edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><line x1="14" y1="6" x2="18" y2="10"/></svg>Edit</button>
+                <button type="button" class="action" data-action="delete"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Delete</button>
+                <a class="action" href="report_issue.html"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Report</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="replies">
+            <article class="reply-card">
+              <div class="comment">
+                <div class="avatar"></div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <strong>Morgan Lee</strong>
+                    <span class="badge">Constituent</span>
+                    <button type="button" class="like" aria-pressed="false"><span class="heart">&#9825;</span><span class="like-count">3</span></button>
+                  </div>
+                  <div class="comment-time">Apr 25, 2025 at 2:20 PM</div>
+                  <p class="comment-text">That's a fair point. I'd like to see amendments that provide support for small businesses during the transition.</p>
+                  <div class="comment-actions">
+                    <button type="button" class="action" data-action="reply"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/></svg>Reply</button>
+                    <button type="button" class="action" data-action="edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><line x1="14" y1="6" x2="18" y2="10"/></svg>Edit</button>
+                    <button type="button" class="action" data-action="delete"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>Delete</button>
+                    <a class="action" href="report_issue.html"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Report</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside>
+      <section class="card summary-box">
+        <h2>Bill Summary</h2>
+        <h3>HB 1234 &ndash; Clean Energy Future Act</h3>
+        <dl class="summary-list">
+          <dt>Status</dt>
+          <dd><span class="badge">In Committee</span></dd>
+
+          <dt>Sponsor</dt>
+          <dd><a href="legislator.html">Rep. Alex Martinez<br>(D &ndash; 7th District)</a></dd>
+
+          <dt>Introduced</dt>
+          <dd>Feb 10, 2025</dd>
+
+          <dt>Last Action</dt>
+          <dd>Apr 15, 2025<br>Referred to Committee on Energy and Environment</dd>
+
+          <dt>Subjects</dt>
+          <dd class="tags">
+            <span class="badge">Clean Energy</span>
+            <span class="badge">Environment</span>
+            <span class="badge">Jobs</span>
+            <span class="badge">Climate</span>
+          </dd>
+        </dl>
+        <a class="btn btn-block" href="bill_details.html">View Full Bill Details &rarr;</a>
+      </section>
+
+      <section class="card summary-box">
+        <h2>Related Votes</h2>
+        <h3>House Vote &ndash; Apr 15, 2025</h3>
+        <p>Motion to refer HB 1234 to committee on Energy and Environment.</p>
+        <div class="vote-box">
+          <div><span>For</span><span>68</span></div>
+          <div><span>Against</span><span>32</span></div>
+          <div><span>Not Voting</span><span>0</span></div>
+        </div>
+        <a class="btn btn-block" href="#">View Vote Details &rarr;</a>
+      </section>
+
+      <section class="card summary-box">
+        <h2>Helpful Links</h2>
+        <ul class="helpful-links">
+          <li><a href="#"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6"/><line x1="20" y1="4" x2="11" y2="13"/><path d="M18 14v6H4V6h6"/></svg>Full Bill Text</a></li>
+          <li><a href="#"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6"/><line x1="20" y1="4" x2="11" y2="13"/><path d="M18 14v6H4V6h6"/></svg>Fiscal Analysis</a></li>
+          <li><a href="#"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6"/><line x1="20" y1="4" x2="11" y2="13"/><path d="M18 14v6H4V6h6"/></svg>Committee Information</a></li>
+        </ul>
+      </section>
+    </aside>
+
+  </main>
+
+</div>
+</body>
+</html>
