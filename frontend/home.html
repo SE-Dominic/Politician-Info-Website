@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LACE | The Legislative Accountability &amp; Civic Engagement</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="home.css" type="text/css">
+    <script src="home.js" type="module"></script>
+</head>
+
+<body>
+    <header class="site-header home-header">
+        <nav>
+            <a href="home.html" aria-current="page">Home</a>
+            <a href="legislator.html">Legislators</a>
+            <a href="bills.html">Bills</a>
+            <a href="discussion.html">Discussions</a>
+            <a href="compare.html">Compare</a>
+            <a href="profile.html">Profile</a>
+            <a href="access.html">Login/Register</a>
+        </nav>
+    </header>
+    <main>
+        <div class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">
+                    Legislation, representatives, and civic engagement
+                </p>
+                <h1>A More Informed, Engaged Democracy</h1>
+                <p>
+                    LACE (Legislative Accountability &amp; Constituent Engagement) helps
+                    you explore legislation, learn about your representatives, and join
+                    meaningful civic discussions. Stay informed. Make your voice heard.
+                </p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#explore">Explore Legislation</a>
+                    <a class="button button-secondary" href="legislator.html">Learn About Your Legislators</a>
+                    <a class="button button-secondary" href="discussion.html">Join Discussions</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <span aria-hidden="true">
+                    <img src="assets/civic_building_icon.png" alt="Civic Building Image" />
+                </span>
+            </div>
+        </div>
+        <div class="search-section">
+            <form id="site-search-form" role="search">
+                <label class="visually-hidden" for="site-search">Search bills and legislators</label>
+                <input id="site-search" type="search" placeholder="Search bills, legislators, or keywords..." />
+                <button class="button button-primary" type="submit">Search</button>
+            </form>
+            <p id="search-status" class="status-message"></p>
+        </div>
+        <div id="explore" class="home-grid">
+            <aside class="panel filter-panel">
+                <h2>Quick Filters</h2>
+                <p class="muted">Filter the featured legislators.</p>
+
+                <label for="state-filter">State</label>
+                <select id="state-filter">
+                    <option value="">All states</option>
+                </select>
+
+                <label for="party-filter">Party</label>
+                <select id="party-filter">
+                    <option value="">All parties</option>
+                </select>
+
+                <label for="chamber-filter">Chamber</label>
+                <select id="chamber-filter">
+                    <option value="">All chambers</option>
+                </select>
+
+                <div class="filter-actions">
+                    <button id="apply-filters" class="button button-primary" type="button">
+                        Apply Filters
+                    </button>
+                    <button id="clear-filters" class="button button-secondary" type="button">
+                        Clear All
+                    </button>
+                </div>
+            </aside>
+
+            <section class="panel content-panel" aria-labelledby="bills-heading">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="bills-heading">Recent Bills</h2>
+                        <p class="muted">Recently updated in the current Congress</p>
+                    </div>
+                    <a href="bill-details.html">View all</a>
+                </div>
+                <p id="bills-status" class="status-message" aria-live="polite">
+                    Loading bills…
+                </p>
+                <div id="recent-bills" class="card-list"></div>
+            </section>
+
+            <section class="panel content-panel" aria-labelledby="discussions-heading">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="discussions-heading">Trending Discussions</h2>
+                        <p class="muted">Conversations from the LACE community</p>
+                    </div>
+                    <a href="discussion.html">View all</a>
+                </div>
+
+                <!-- Sample content for the prototype; later load this from your PHP database API. -->
+                <article class="mini-card searchable-card" data-search="renewable energy incentives">
+                    <div class="mini-card-icon" aria-hidden="true">
+                        <img src="assets/chat_bubble_icon.png" alt="Chat Icon" />
+                    </div>
+                    <div>
+                        <h3>Should Congress expand renewable energy incentives?</h3>
+                        <p class="muted">128 comments · 3.2k views</p>
+                        <a class="button button-secondary" href="discussion.html">Open Discussion</a>
+                    </div>
+                </article>
+
+                <article class="mini-card searchable-card" data-search="immigration reform">
+                    <div class="mini-card-icon" aria-hidden="true">
+                        <img src="assets/chat_bubble_icon.png" alt="Chat Icon" />
+                    </div>
+                    <div>
+                        <h3>What are your thoughts on immigration reform?</h3>
+                        <p class="muted">95 comments · 2.1k views</p>
+                        <a class="button button-secondary" href="discussion.html">Open Discussion</a>
+                    </div>
+                </article>
+
+                <article class="mini-card searchable-card" data-search="healthcare bill">
+                    <div class="mini-card-icon" aria-hidden="true">
+                        <img src="assets/chat_bubble_icon.png" alt="Chat Icon" />
+                    </div>
+                    <div>
+                        <h3>Is the current healthcare bill sufficient?</h3>
+                        <p class="muted">210 comments · 4.5k views</p>
+                        <a class="button button-secondary" href="discussion.html">Open Discussion</a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel content-panel" aria-labelledby="legislators-heading">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="legislators-heading">Featured Legislators</h2>
+                        <p class="muted">Current members of Congress</p>
+                    </div>
+                    <a href="legislator.html">View all</a>
+                </div>
+                <p id="members-status" class="status-message" aria-live="polite">
+                    Loading legislators…
+                </p>
+                <div id="featured-legislators" class="card-list"></div>
+            </section>
+        </div>
+
+        <div class="compare-banner">
+            <div class="compare-icon" aria-hidden="true">
+                <img src="assets/comparison_icon.jpg" alt="Compare Icon" />
+            </div>
+            <div>
+                <h2>Compare Legislators</h2>
+                <p>
+                    Compare voting records, sponsored bills, and activity side by side.
+                </p>
+            </div>
+            <a class="button button-primary" href="compare.html">Compare Legislators</a>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div>
+            <strong>LACE</strong>
+            <p>The Legislative Accountability &amp; Civic Engagement</p>
+            <p>A more informed and engaged democracy.</p>
+        </div>
+        <div>
+            <h2>Quick Links</h2>
+            <a href="home.html">Home</a>
+            <a href="legislator.html">Legislators</a>
+            <a href="bills.html">Bills</a>
+            <a href="discussion.html">Discussions</a>
+            <a href="compare.html">Compare</a>
+        </div>
+        <div>
+            <h2>About</h2>
+            <a href="about.html">About Us</a>
+            <a href="mission.html">Our Mission</a>
+            <a href="team.html">Get Involved</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div>
+            <p>Follow Us</p>
+            <a href="https://x.com">
+                <img src="assets/X_logo_2023.svg.webp" alt="X Logo" />
+            </a>
+            <a href="https://facebook.com">
+                <img src="assets/2023_Facebook_icon.svg.webp" alt="Facebook Logo" />
+            </a>
+            <a href="https://instagram.com">
+                <img src="assets/Instagram_logo_2022.svg.webp" alt="Instagram Logo" />
+            </a>
+        </div>
+        <p class="copyright">&copy; 2026 LACE. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

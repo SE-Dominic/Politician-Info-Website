@@ -1,0 +1,195 @@
+/* Home page hero section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 40px;
+    background-color: AliceBlue;
+    border: 1px solid Silver;
+    border-radius: 8px;
+}
+
+.hero-copy {
+    flex: 2;
+}
+
+.eyebrow {
+    color: Teal;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 8px 0;
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+.hero-copy > p:not(.eyebrow) {
+    max-width: 760px;
+    font-size: 18px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hero-image {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 20px;
+    background-color: White;
+    border: 1px solid Silver;
+    border-radius: 8px;
+}
+
+.hero-image img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+/* Home page search form */
+.search-section {
+    margin: 20px 0;
+}
+
+#site-search-form {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    background-color: White;
+    border: 1px solid Silver;
+    border-radius: 8px;
+}
+
+#site-search {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid Gray;
+    border-radius: 5px;
+}
+
+/* Home page filters and content columns */
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr;
+    align-items: start;
+    gap: 16px;
+}
+
+.filter-panel label {
+    display: block;
+    margin: 16px 0 5px;
+    font-weight: bold;
+}
+
+.filter-panel select {
+    width: 100%;
+    padding: 9px;
+    background-color: White;
+    border: 1px solid Gray;
+    border-radius: 5px;
+}
+
+.filter-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+/* Home page legislator comparison banner */
+.compare-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 24px;
+    background-color: AliceBlue;
+    border: 1px solid Silver;
+    border-radius: 8px;
+}
+
+.compare-banner h2 {
+    margin-top: 0;
+}
+
+.compare-banner > div:nth-child(2) {
+    flex: 1;
+}
+
+.compare-banner p {
+    margin-bottom: 0;
+}
+
+.compare-icon {
+    flex: 0 0 64px;
+}
+
+.compare-icon img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Home page responsive layout */
+@media (max-width: 1000px) {
+    .home-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-panel {
+        grid-row: span 2;
+    }
+}
+
+@media (max-width: 700px) {
+    .hero {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero-image {
+        min-height: 160px;
+    }
+
+    .hero-image img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-panel {
+        grid-row: auto;
+    }
+
+    .compare-banner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    #site-search-form {
+        flex-direction: column;
+    }
+}

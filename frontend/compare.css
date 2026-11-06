@@ -1,0 +1,388 @@
+/* Page-specific comparison styles. Shared components are in styles.css. */
+
+:root {
+  --vote-majority: Green;
+  --vote-against: Yellow;
+  --vote-not-voting: Red;
+  --vote-present: Orange;
+  --vote-tie: YellowGreen;
+}
+
+.compare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.compare-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.compare-brand .site-logo {
+  color: DarkSlateGray;
+  font-size: 36px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.compare-brand span {
+  max-width: 190px;
+  padding-left: 14px;
+  border-left: 1px solid Gray;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.compare-header nav a[aria-current="page"] {
+  background-color: Gainsboro;
+  font-weight: bold;
+}
+
+.compare-main {
+  max-width: 1400px;
+}
+
+.page-intro {
+  margin-bottom: 22px;
+}
+
+.page-intro h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.page-intro p {
+  max-width: 700px;
+  margin: 6px 0 0;
+  color: DimGray;
+}
+
+.selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.selector-card {
+  position: relative;
+  padding: 18px;
+  background-color: WhiteSmoke;
+  border: 1px solid Silver;
+}
+
+.selector-card h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.legislator-search label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.search-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.search-controls input {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px;
+  background-color: White;
+  border: 1px solid Gray;
+  border-radius: 4px;
+}
+
+.search-results {
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  right: 18px;
+  left: 18px;
+  max-height: 300px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  background-color: White;
+  border: 1px solid Silver;
+  box-shadow: 0 3px 8px Silver;
+}
+
+.search-results li + li {
+  border-top: 1px solid Gainsboro;
+}
+
+.search-result-button {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background-color: White;
+  border: 0;
+  cursor: pointer;
+}
+
+.search-result-button:hover,
+.search-result-button:focus-visible {
+  background-color: AliceBlue;
+}
+
+.search-result-button strong,
+.search-result-button span {
+  display: block;
+}
+
+.search-result-button span {
+  color: DimGray;
+  font-size: 14px;
+}
+
+.status-message {
+  margin: 8px 0 0;
+}
+
+.profile-comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(130px, 0.45fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+  margin: 20px 0;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: 0;
+}
+
+.profile-card h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.profile-card-content {
+  display: grid;
+  grid-template-columns: 125px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.profile-photo {
+  width: 125px;
+  height: 145px;
+  object-fit: cover;
+  background-color: Gainsboro;
+  border: 1px solid Gray;
+}
+
+.profile-details h3 {
+  margin: 0 0 4px;
+  font-size: 21px;
+}
+
+.profile-details p {
+  margin: 5px 0;
+}
+
+.profile-card > .button {
+  align-self: center;
+  min-width: 190px;
+}
+
+.versus-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  text-align: center;
+  background-color: WhiteSmoke;
+  border: 1px solid Silver;
+}
+
+.versus-panel strong {
+  font-size: 34px;
+}
+
+.versus-panel p {
+  margin: 10px 0 0;
+  color: DimGray;
+}
+
+.comparison-section {
+  margin: 20px 0;
+  padding: 18px;
+  background-color: White;
+  border: 1px solid Silver;
+}
+
+.comparison-section .section-heading {
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.comparison-section .section-heading h2 {
+  margin: 0;
+}
+
+.comparison-section .section-heading p {
+  margin: 0;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 10px 12px;
+  border: 1px solid LightGray;
+}
+
+.comparison-table thead th {
+  background-color: WhiteSmoke;
+}
+
+.comparison-table tbody th[scope="row"] {
+  width: 40%;
+  background-color: WhiteSmoke;
+}
+
+.comparison-table tbody td {
+  width: 30%;
+}
+
+.comparison-table tbody tr:nth-child(even) td {
+  background-color: WhiteSmoke;
+}
+
+.chart-row td {
+  vertical-align: top;
+}
+
+.donut-chart {
+  width: 150px;
+  height: 150px;
+  margin: 4px auto 12px;
+  background-color: Gainsboro;
+  border-radius: 50%;
+  position: relative;
+}
+
+.donut-chart::after {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  bottom: 25%;
+  left: 25%;
+  content: "";
+  background-color: White;
+  border-radius: 50%;
+}
+
+.vote-legend {
+  max-width: 250px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.vote-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.legend-swatch {
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.legend-majority {
+  background-color: Green;
+}
+
+.legend-against {
+  background-color: Yellow;
+}
+
+.legend-not-voting {
+  background-color: Red;
+}
+
+.legend-present {
+  background-color: Orange;
+}
+
+.legend-tie {
+  background-color: YellowGreen;
+}
+
+.vote-status {
+  margin: 12px 0 0;
+}
+
+@media (max-width: 900px) {
+  .compare-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-comparison {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .versus-panel {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 650px) {
+  .selector-grid,
+  .profile-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .versus-panel {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .profile-card-content {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 120px;
+  }
+
+  .page-intro h1 {
+    font-size: 28px;
+  }
+
+  .comparison-section {
+    padding: 12px;
+  }
+}

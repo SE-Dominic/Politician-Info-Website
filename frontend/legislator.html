@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>LACE | The Legislative Accountability &amp; Civic Engagement</title>
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+  <link rel="stylesheet" href="legislator.css" type="text/css" />
+  <script src="legislator.js" type="module"></script>
+</head>
+
+<body>
+  <header class="site-header legislator-header">
+    <div>
+      <a href="home.html" class="site-logo">LACE</a>
+      <span>Legislative Accountability &amp; Civic Engagement</span>
+    </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="legislator.html" aria-current="page">Legislators</a>
+      <a href="bills.html">Bills</a>
+      <a href="discussion.html">Discussions</a>
+      <a href="about.html">About</a>
+    </nav>
+    <form id="header-search-form" role="search">
+      <label for="header-search" class="visually-hidden">Search legislators</label>
+      <input id="header-search" type="search" placeholder="Search legislators..." />
+    </form>
+  </header>
+  <main class="legislator-main">
+    <div class="search-panel">
+      <form id="member-search-form">
+        <div class="name-search">
+          <label for="member-search">Find a Legislator</label>
+          <input id="member-search" type="search" placeholder="Enter legislator name..." />
+        </div>
+        <div>
+          <label for="state-filter">State</label><select id="state-filter">
+            <option value="">All States</option>
+          </select>
+        </div>
+        <div>
+          <label for="district-filter">District</label><select id="district-filter">
+            <option value="">All Districts</option>
+          </select>
+        </div>
+        <div>
+          <label for="chamber-filter">Chamber</label><select id="chamber-filter">
+            <option value="">All Chambers</option>
+          </select>
+        </div>
+        <div>
+          <label for="party-filter">Party</label><select id="party-filter">
+            <option value="">All Parties</option>
+          </select>
+        </div>
+        <button type="submit" class="button button-primary">Find</button>
+      </form>
+      <p id="search-status" class="status-message" aria-live="polite">
+        Loading current legislators...
+      </p>
+      <div id="member-results" class="member-results" aria-label="Search results" role="region"></div>
+    </div>
+    <section class="profile-panel" aria-label="Legislator profile">
+      <div class="portrait">
+        <img id="member-photo" src="./assets/profile_photo_icon.jpg" alt="Congressional Member Photo" hidden />
+        <div id="photo-placeholder" class="photo-placeholder">
+          No photo available
+        </div>
+      </div>
+      <div class="profile-details">
+        <h1 id="member-name">Select a legislator</h1>
+        <p id="member-heading">Search above to view a member's profile.</p>
+        <p><strong>State:</strong> <span id="member-state">—</span></p>
+        <p><strong>District:</strong> <span id="member-district">—</span></p>
+        <p>
+          <strong>Years in Office:</strong> <span id="member-years">—</span>
+        </p>
+        <p id="profile-status" class="status-message" aria-live="polite"></p>
+      </div>
+      <div class="profile-actions">
+        <a id="compare-link" class="button button-primary" aria-disabled="true">Compare Legislators</a>
+        <button id="follow-button" class="button button-secondary" disabled>
+          Follow Legislator
+        </button>
+        <small id="follow-status"></small>
+      </div>
+    </section>
+    <div class="legislation-grid">
+      <section class="panel">
+        <div class="section-heading">
+          <h2>Sponsored Bills</h2>
+          <span id="sponsored-count" class="muted"></span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Bill #</th>
+                <th>Title</th>
+                <th>Latest Action</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="sponsored-body">
+              <tr>
+                <td colspan="4">Select a legislator.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button id="more-sponsored" class="text-button" hidden>
+          View More
+        </button>
+      </section>
+      <section class="panel">
+        <div class="section-heading">
+          <h2>Cosponsored Bills</h2>
+          <span id="cosponsored-count" class="muted"></span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Bill #</th>
+                <th>Title</th>
+                <th>Latest Action</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="cosponsored-body">
+              <tr>
+                <td colspan="4">Select a legislator.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button id="more-cosponsored" class="text-button" hidden>
+          View More
+        </button>
+      </section>
+    </div>
+    <div class="voting-grid">
+      <section class="panel">
+        <div class="section-heading">
+          <h2>Voting History</h2>
+          <a id="full-votes-link" href="https://clerk.house.gov/Votes">Official vote records</a>
+        </div>
+        <p class="muted">
+          All available House roll calls for the current session are shown here.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Bill / Roll Call</th>
+                <th>Question</th>
+                <th>Vote</th>
+              </tr>
+            </thead>
+            <tbody id="votes-body">
+              <tr>
+                <td colspan="4">Select a legislator.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Attendance / Participation</h2>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <h3>Participated</h3>
+            <strong id="participated-count">—</strong><span id="participated-percent">—</span>
+          </div>
+          <div class="stat-card">
+            <h3>Not Voting</h3>
+            <strong id="not-voting-count">—</strong><span id="not-voting-percent">—</span>
+          </div>
+        </div>
+        <p id="participation-note" class="muted">
+          Statistics is calculated from retrieved votes in current session. There is not any
+          estimation made for missing records.
+        </p>
+      </section>
+    </div>
+    <section class="panel discussions-panel">
+      <div class="section-heading">
+        <h2>Constituent Discussions</h2>
+        <a href="discussion.html">View All Discussions</a>
+      </div>
+      <p class="muted">
+        Discussion data will load here once the LACE PHP/database API is
+        connected.
+      </p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>
+      <strong>LACE</strong> - Legislative Accountability &amp; Civic
+      Engagement
+    </p>
+    <p>&copy; 2026 LACE. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
