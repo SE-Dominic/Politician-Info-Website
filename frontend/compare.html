@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>LACE | Compare Legislators</title>
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <link rel="stylesheet" href="compare.css" type="text/css">
+  <script src="compare.js" type="module"></script>
+</head>
+
+<body>
+  <header class="site-header compare-header">
+    <div class="compare-brand">
+      <a class="site-logo" href="home.html">LACE</a>
+      <span>Legislative Accountability &amp; Constituent Engagement</span>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <a href="home.html">Home</a>
+      <a href="legislator.html">Legislators</a>
+      <a href="bills.html">Bills</a>
+      <a href="discussion.html">Discussions</a>
+      <a href="compare.html" aria-current="page">Compare</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="compare-main">
+    <section class="page-intro" aria-labelledby="page-title">
+      <h1 id="page-title">Compare Legislators</h1>
+      <p>
+        Compare two current legislators’ profiles, available voting records,
+        and legislation counts.
+      </p>
+    </section>
+
+    <section class="selector-grid" aria-label="Choose legislators">
+      <section class="selector-card" aria-labelledby="selector-a-heading">
+        <h2 id="selector-a-heading">Select Legislator A</h2>
+        <form id="search-form-a" class="legislator-search">
+          <label for="search-input-a">Search by name, state, district, or party</label>
+          <div class="search-controls">
+            <input id="search-input-a" type="search" autocomplete="off" placeholder="Search current legislators...">
+            <button class="button button-secondary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+        <ul id="search-results-a" class="search-results" hidden></ul>
+        <p id="search-status-a" class="status-message" aria-live="polite"></p>
+      </section>
+
+      <section class="selector-card" aria-labelledby="selector-b-heading">
+        <h2 id="selector-b-heading">Select Legislator B</h2>
+        <form id="search-form-b" class="legislator-search">
+          <label for="search-input-b">Search by name, state, district, or party</label>
+          <div class="search-controls">
+            <input id="search-input-b" type="search" autocomplete="off" placeholder="Search current legislators...">
+            <button class="button button-secondary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+        <ul id="search-results-b" class="search-results" hidden></ul>
+        <p id="search-status-b" class="status-message" aria-live="polite"></p>
+      </section>
+    </section>
+
+    <p id="compare-status" class="status-message" aria-live="polite">
+      Choose two different current legislators to compare.
+    </p>
+
+    <div id="comparison-results" hidden>
+      <section class="profile-comparison" aria-label="Legislator profiles">
+        <article class="profile-card panel">
+          <h2>Legislator A</h2>
+          <div class="profile-card-content">
+            <img id="photo-a" class="profile-photo" src="./assets/profile_photo_icon.jpg" alt="Legislator A portrait">
+            <div class="profile-details">
+              <h3 id="name-a">—</h3>
+              <p id="chamber-a">—</p>
+              <p><strong>Party:</strong> <span id="party-a">—</span></p>
+              <p><strong>State:</strong> <span id="state-a">—</span></p>
+              <p><strong>District:</strong> <span id="district-a">—</span></p>
+              <p>
+                <strong>Years in Office:</strong> <span id="years-a">—</span>
+              </p>
+            </div>
+          </div>
+          <a id="profile-link-a" class="button button-secondary" href="legislator.html">
+            View Full Profile
+          </a>
+        </article>
+
+        <div class="versus-panel" aria-label="Side-by-side comparison" role="group">
+          <strong>VS</strong>
+          <p>Compare available records and activity.</p>
+        </div>
+
+        <article class="profile-card panel">
+          <h2>Legislator B</h2>
+          <div class="profile-card-content">
+            <img id="photo-b" class="profile-photo" src="./assets/profile_photo_icon.jpg" alt="Legislator B portrait">
+            <div class="profile-details">
+              <h3 id="name-b">—</h3>
+              <p id="chamber-b">—</p>
+              <p><strong>Party:</strong> <span id="party-b">—</span></p>
+              <p><strong>State:</strong> <span id="state-b">—</span></p>
+              <p><strong>District:</strong> <span id="district-b">—</span></p>
+              <p>
+                <strong>Years in Office:</strong> <span id="years-b">—</span>
+              </p>
+            </div>
+          </div>
+          <a id="profile-link-b" class="button button-secondary" href="legislator.html">
+            View Full Profile
+          </a>
+        </article>
+      </section>
+
+      <section class="comparison-section" aria-labelledby="voting-heading">
+        <div class="section-heading">
+          <h2 id="voting-heading">Voting Record Summary</h2>
+          <p class="muted">
+            House roll calls available for the current session
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Legislator A</th>
+                <th scope="col">Voting Metric</th>
+                <th scope="col">Legislator B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="chart-row">
+                <td>
+                  <div id="vote-chart-a" class="donut-chart" role="img" aria-label="Legislator A voting record chart">
+                  </div>
+                  <ul id="vote-legend-a" class="vote-legend"></ul>
+                </td>
+                <th scope="row">Vote Distribution</th>
+                <td>
+                  <div id="vote-chart-b" class="donut-chart" role="img" aria-label="Legislator B voting record chart">
+                  </div>
+                  <ul id="vote-legend-b" class="vote-legend"></ul>
+                </td>
+              </tr>
+              <tr>
+                <td id="vote-a-majority">—</td>
+                <th scope="row">Voted With Majority</th>
+                <td id="vote-b-majority">—</td>
+              </tr>
+              <tr>
+                <td id="vote-a-against">—</td>
+                <th scope="row">Voted Against Majority</th>
+                <td id="vote-b-against">—</td>
+              </tr>
+              <tr>
+                <td id="vote-a-not-voting">—</td>
+                <th scope="row">Not Voting</th>
+                <td id="vote-b-not-voting">—</td>
+              </tr>
+              <tr>
+                <td id="vote-a-present">—</td>
+                <th scope="row">Present</th>
+                <td id="vote-b-present">—</td>
+              </tr>
+              <tr>
+                <td id="vote-a-tie">—</td>
+                <th scope="row">Tie / No Majority</th>
+                <td id="vote-b-tie">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="vote-status" class="muted" aria-live="polite">
+          Vote data will load after both legislators are selected.
+        </p>
+      </section>
+
+      <section class="comparison-section" aria-labelledby="legislation-heading">
+        <div class="section-heading">
+          <h2 id="legislation-heading">Legislation</h2>
+          <p class="muted">
+            Counts include all Congresses reported by the API
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Legislator A</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Legislator B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="sponsored-a">—</td>
+                <th scope="row">Sponsored Legislation</th>
+                <td id="sponsored-b">—</td>
+              </tr>
+              <tr>
+                <td id="cosponsored-a">—</td>
+                <th scope="row">Cosponsored Legislation</th>
+                <td id="cosponsored-b">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="comparison-section" aria-labelledby="presence-heading">
+        <div class="section-heading">
+          <h2 id="presence-heading">Presence / Participation</h2>
+          <p class="muted">
+            Available House roll calls for the current session
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Legislator A</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Legislator B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="presence-not-voting-a">—</td>
+                <th scope="row">Not Voting</th>
+                <td id="presence-not-voting-b">—</td>
+              </tr>
+              <tr>
+                <td id="presence-present-a">—</td>
+                <th scope="row">Present (but not voting)</th>
+                <td id="presence-present-b">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="comparison-section" aria-labelledby="activity-heading">
+        <div class="section-heading">
+          <h2 id="activity-heading">Activity Metrics</h2>
+          <p class="muted">
+            These measures are not connected to the current API service.
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">Legislator A</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Legislator B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unavailable</td>
+                <th scope="row">Committee Meeting Attendance</th>
+                <td>Unavailable</td>
+              </tr>
+              <tr>
+                <td>Unavailable</td>
+                <th scope="row">Committee Assignments</th>
+                <td>Unavailable</td>
+              </tr>
+              <tr>
+                <td>Unavailable</td>
+                <th scope="row">Floor Speeches</th>
+                <td>Unavailable</td>
+              </tr>
+              <tr>
+                <td>Unavailable</td>
+                <th scope="row">Bipartisan Legislation</th>
+                <td>Unavailable</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <h2>LACE</h2>
+      <p>Legislative Accountability &amp; Constituent Engagement</p>
+    </div>
+    <div>
+      <h2>Quick Links</h2>
+      <a href="home.html">Home</a>
+      <a href="legislator.html">Legislators</a>
+      <a href="bills.html">Bills</a>
+      <a href="discussion.html">Discussions</a>
+      <a href="compare.html">Compare</a>
+    </div>
+    <div>
+      <h2>About</h2>
+      <a href="about.html">About LACE</a>
+      <a href="about.html">Our Mission</a>
+    </div>
+    <p class="copyright">&copy; 2026 LACE. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
