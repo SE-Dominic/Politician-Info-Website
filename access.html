@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Access Account</title>
+	<link rel="stylesheet" href="accessStyles.css">
 </head>
 <header></header>
 <body>
@@ -12,13 +13,13 @@
         <h3>Sign in to participate in discussions, submit sources, and manage your profile. New users can create an account below.</h3>
         <img src="#">
     </div>
-    <table>
+    <table id="signInTable">
         <tr>
             <td>
                 <h3><b>Welcome Back</b></h3>
                 <br>
                 <h4>Sign in to your LACE account.</h4>
-                <form>
+                <form id="signInForm">
                     <label for="accountSignIn">Email or Username</label>
                     <br>
                     <input type="text" name="accountSignIn" id="accountSignInInput">
@@ -39,7 +40,7 @@
         <td>
             <h4>Create Your Account</h4>
             <h6>Join LACE to engage in discussions and make your voice count.</h6>
-            <form>
+            <form action="signup.php" id="createAccountForm">
                 <label for="createAccountUsername">Email or Username</label>
                 <br>
                 <input type="text" name="createAccountUsername" id="createAccountUsernameInput">
@@ -155,7 +156,7 @@
                 <p>You can browese bills, legislators, and discussions without signing in.</p>
                 <hr>
                 <h6>To post in disucssions, submit sources, follow legislators, save your preferences, or access additional features, you'll need to create an account.</h6>
-                <button onclick=""><b>Browse as Guest</b></button>
+                <button onclick="createTempUser()"><b>Browse as Guest</b></button>
             </td>
         </tr>
     </table>

@@ -1,0 +1,332 @@
+:root {
+    color-scheme: light;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202124;
+    background: #f3f4f4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(250px, 0.85fr);
+    grid-template-areas:
+        "profile settings"
+        "edit edit"
+        "history history";
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px;
+    background: #f3f4f4;
+    font-size: 14px;
+}
+
+#displayUserInfo,
+#accountSettings,
+#editUserProfile,
+#userHistorySection > div:not(:empty) {
+    min-width: 0;
+    border: 1px solid #c9ccce;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+#displayUserInfo {
+    grid-area: profile;
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    align-content: center;
+    align-items: center;
+    column-gap: 16px;
+    padding: 18px;
+}
+
+#displayUserInfo::before {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 112px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(ellipse at 50% 42%, #666 0 22%, transparent 23%),
+        radial-gradient(ellipse at 50% 105%, #666 0 38%, transparent 39%),
+        #dedfe0;
+    content: "";
+}
+
+#displayUserInfo h2 {
+    grid-column: 2;
+    align-self: end;
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+#displayUserInfo h6 {
+    grid-column: 2;
+    align-self: start;
+    margin: 2px 0 8px;
+    color: #606367;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+#displayUserInfo ul {
+    grid-column: 2;
+    align-self: start;
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#displayUserInfo li {
+    min-height: 18px;
+    font-weight: 600;
+}
+
+#accountSettings {
+    grid-area: settings;
+    padding: 14px 16px;
+}
+
+#accountSettings h5 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+}
+
+#accountSettings input {
+    display: block;
+    width: 100%;
+    min-height: 34px;
+    margin: 6px 0;
+    padding: 7px 9px;
+    border: 1px solid #bfc2c4;
+    border-radius: 3px;
+    background: #fff;
+    font: inherit;
+}
+
+#accountSettings hr {
+    margin: 12px 0;
+    border: 0;
+    border-top: 1px solid #d5d7d9;
+}
+
+#accountSettings button,
+#editUserProfile button {
+    min-height: 36px;
+    padding: 7px 14px;
+    border: 1px solid #aeb1b3;
+    border-radius: 3px;
+    background: rgb(218 220 222 / 82%);
+    color: #202124;
+    font: inherit;
+    cursor: pointer;
+}
+
+#accountSettings button:hover,
+#editUserProfile button:hover {
+    background: #d0d2d4;
+}
+
+#editUserProfile {
+    grid-area: edit;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    column-gap: 22px;
+    row-gap: 7px;
+    padding: 14px 16px;
+}
+
+#editUserProfile::before {
+    grid-column: 1 / -1;
+    content: "Edit Profile";
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#editUserProfile label {
+    align-self: end;
+    font-weight: 600;
+}
+
+#editUserProfile input,
+#editUserProfile select {
+    width: 100%;
+    min-height: 34px;
+    padding: 7px 9px;
+    border: 1px solid #bfc2c4;
+    border-radius: 3px;
+    background: #fff;
+    color: #292b2d;
+    font: inherit;
+}
+
+#editUserProfile label[for="editProfileUserName"],
+#editUserProfile label[for="editProfileDistrict"] {
+    grid-column: 1;
+}
+
+#editUserProfile label[for="editProfileUserName"] {
+    grid-row: 2;
+}
+
+#editUserProfile #editProfileUsernameInput,
+#editUserProfile #editProfileDistrict {
+    grid-column: 1;
+}
+
+#editUserProfile #editProfileUsernameInput {
+    grid-row: 3;
+}
+
+#editUserProfile label[for=""],
+#editUserProfile #editProfileState {
+    grid-column: 1;
+}
+
+#editUserProfile label[for=""] {
+    grid-row: 4;
+}
+
+#editUserProfile #editProfileState {
+    grid-row: 5;
+}
+
+#editUserProfile label[for="editProfileDistrict"] {
+    grid-row: 6;
+}
+
+#editUserProfile #editProfileDistrict {
+    grid-row: 7;
+}
+
+#editUserProfile > br {
+    display: none;
+}
+
+#editUserProfile button {
+    grid-column: 1;
+    grid-row: 8;
+    justify-self: start;
+    min-width: 130px;
+    margin-top: 10px;
+    background: #676a6c;
+    color: #fff;
+}
+
+#editUserProfile button:hover {
+    background: #515456;
+}
+
+#userHistorySection {
+    grid-area: history;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#userHistorySection > br {
+    display: none;
+}
+
+#userHistorySection > div {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #c9ccce;
+    border-radius: 3px;
+    background: #fff;
+}
+
+#userHistorySection h3 {
+    display: inline-block;
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+#userHistorySection a {
+    float: right;
+    color: #333638;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#userHistorySection a h5 {
+    margin: 2px 0 8px;
+    font-size: 0.8rem;
+}
+
+#userHistorySection hr {
+    clear: both;
+    margin: 0 0 5px;
+    border: 0;
+    border-top: 1px solid #d5d7d9;
+}
+
+#userHistorySection ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#userHistorySection li {
+    min-height: 32px;
+    padding: 7px 4px;
+    border-bottom: 1px solid #e0e1e2;
+}
+
+#userHistorySection li:last-child {
+    border-bottom: 0;
+}
+
+@media (max-width: 700px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "profile"
+            "settings"
+            "edit"
+            "history";
+    }
+
+    #userHistorySection {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 440px) {
+    body {
+        padding: 9px;
+    }
+
+    #displayUserInfo {
+        grid-template-columns: 76px minmax(0, 1fr);
+        column-gap: 12px;
+        padding: 13px;
+    }
+
+    #displayUserInfo::before {
+        width: 72px;
+    }
+
+    #editUserProfile {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+    }
+
+    #editUserProfile::before,
+    #editUserProfile label,
+    #editUserProfile input,
+    #editUserProfile select,
+    #editUserProfile button {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}

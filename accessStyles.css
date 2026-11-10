@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 2rem;
+    background-color: #f8f7f2;
+    color: #111;
+    font-family: Arial, sans-serif;
+}
+
+.access-account-description {
+    max-width: 72rem;
+    margin: 0 auto 1.5rem;
+}
+
+#signInTable {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fffefa;
+}
+
+#signInTable td {
+    width: 50%;
+    padding: 1.5rem 2rem;
+    vertical-align: top;
+    border: 1px solid #222;
+}
+
+#signInTable tr + tr td {
+    border-top: 2px solid #222;
+}
+
+#signInTable h3,
+#signInTable h4,
+#signInTable h5,
+#signInTable h6,
+#signInTable p {
+    margin-top: 0;
+}
+
+#signInTable form label {
+    display: inline-block;
+    margin: 0.6rem 0 0.3rem;
+}
+
+#signInTable input:not([type="checkbox"]),
+#signInTable select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 28rem;
+    min-height: 2.4rem;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid #555;
+    border-radius: 3px;
+}
+
+#signInTable ul {
+    padding-left: 1.25rem;
+}
+
+#signInTable li {
+    margin-bottom: 0.8rem;
+}
+
+button {
+    margin-top: 0.6rem;
+    padding: 0.55rem 0.9rem;
+    color: #111;
+    background-color: rgb(220 220 216 / 82%);
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(205 205 201 / 90%);
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 1rem;
+    }
+
+    #signInTable,
+    #signInTable tbody,
+    #signInTable tr,
+    #signInTable td {
+        display: block;
+        width: auto;
+    }
+
+    #signInTable td {
+        padding: 1.25rem;
+    }
+}
