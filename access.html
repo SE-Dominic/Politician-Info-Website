@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Access Account</title>
+    <link rel="stylesheet" href="accessStyles.css">
 </head>
 <header></header>
 <body>
@@ -19,13 +20,13 @@
                 <br>
                 <h4>Sign in to your LACE account.</h4>
                 <form id="signInForm">
-                    <label for="accountSignIn">Email or Username</label>
+                    <label for="accountSignInInput">Email or Username</label>
                     <br>
-                    <input type="text" name="accountSignIn" id="accountSignInInput">
+                    <input type="text" name="accountSignIn" id="accountSignInInput" placeholder="Enter your email or username">
                     <br>
-                    <label for="accountPassword">Password</label>
+                    <label for="accountPasswordInput">Password</label>
                     <br>
-                    <input type="text" name="accountPassword" id="accountPasswordInput">
+                    <input type="password" name="accountPassword" id="accountPasswordInput" placeholder="Enter your password">
                     <br>
                     <label for="rememberMeBox">Remember Me</label>
                     <input type="checkbox" name="rememberMeBox" id="rememberMeBox">
@@ -40,16 +41,16 @@
             <h4>Create Your Account</h4>
             <h6>Join LACE to engage in discussions and make your voice count.</h6>
             <form action="signup.php" id="createAccountForm">
-                <label for="createAccountUsername">Email or Username</label>
+                <label for="createAccountUsernameInput">Email or Username</label>
                 <br>
-                <input type="text" name="createAccountUsername" id="createAccountUsernameInput">
+                <input type="text" name="createAccountUsername" id="createAccountUsernameInput" placeholder="Choose an email or username">
                 <br>
-                <label for="createAccountPassword">Password</label>
+                <label for="createAccountPasswordInput">Password</label>
                 <br>
-                <input type="text" name="createAccountPassword" id="createAccountPasswordInput">
+                <input type="password" name="createAccountPassword" id="createAccountPasswordInput" placeholder="Create a password">
                 <br>
                 <label for="createUserConfirmPassword">Confirm Password</label>
-                <input type="text" name="createUserConfirmPassword" id="createUserConfirmPassword">
+                <input type="password" name="createUserConfirmPassword" id="createUserConfirmPassword" placeholder="Confirm your password">
                 <br>
                 <label for="state">State:</label>
                 <select name="createUserState" id="createUserState">
@@ -129,23 +130,19 @@
                 <p>A LACE account helps you get more involved and make a bigger impact.</p>
                 <ul>
                     <li>
-                        <b><p>Join Discussions</p></b>
-                        <br>
+                        <strong>Join Discussions</strong>
                         <p>Share your thoughts and engage with other constituents.</p>
                     </li>
                     <li>
-                        <b><p>Submit Sources</p></b>
-                        <br>
+                        <strong>Submit Sources</strong>
                         <p>Add credible sources to support discussions and legislation.</p>
                     </li>
                     <li>
-                        <b><p>Save Your Preferences</p></b>
-                        <br>
+                        <strong>Save Your Preferences</strong>
                         <p>Follow bills, legislators, and topics that matter to you.</p>
                     </li>
                     <li>
-                        <b><p>Follow Legislators</p></b>
-                        <br>
+                        <strong>Follow Legislators</strong>
                         <p>Get updates on your representatives and their activity.</p>
                     </li>
                 </ul>
