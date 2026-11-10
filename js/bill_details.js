@@ -55,4 +55,7 @@ function setupBillFeedback() {
 
   supportBtn.addEventListener("click", function () { choose("support"); });
   opposeBtn.addEventListener("click", function () { choose("oppose"); });
+
+  // Draw the counts, percentages and bar widths from the data on page load
+  render();
 }
