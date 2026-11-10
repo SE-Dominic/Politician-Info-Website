@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moderator Dashboard</title>
+  <link rel="stylesheet" href="moderator.css">
+  <script src="moderator.js" defer></script>
+</head>
+<body class="moderator-page">
+  <header class="site-header moderator-header">
+    <a href="home.html" aria-label="LACE home">LACE</a>
+    <p>Legislative Accountability &amp; Constituent Engagement</p>
+    <nav aria-label="Moderator navigation">
+      <a href="moderator.html" aria-current="page">Dashboard</a>
+      <a href="#pending-sources">Pending Sources</a>
+      <a href="#reported-comments">Reported Comments</a>
+      <a href="admin.html">Users</a>
+      <a href="admin.html">Reports</a>
+    </nav>
+    <p><span aria-hidden="true">●</span> Moderator <a href="profile.html">Account</a></p>
+  </header>
+
+  <main class="moderator-main">
+    <section class="dashboard-overview" aria-labelledby="dashboard-title">
+      <div>
+        <h1 id="dashboard-title">Moderator Dashboard</h1>
+        <p>Review and manage user-submitted content to keep LACE respectful, accurate, and on-topic.</p>
+      </div>
+      <dl class="dashboard-summary" aria-label="Moderation summary">
+        <div>
+          <dt>Pending Sources</dt>
+          <dd id="pending-count">12</dd>
+        </div>
+        <div>
+          <dt>Reported Comments</dt>
+          <dd>8</dd>
+        </div>
+        <div>
+          <dt>Escalations (Last 7 days)</dt>
+          <dd>0</dd>
+        </div>
+      </dl>
+    </section>
+
+    <p id="moderator-message" role="status" aria-live="polite"></p>
+
+    <section class="moderation-queues" aria-label="Moderation queues">
+      <nav class="queue-tabs" aria-label="Review queues">
+        <a href="#pending-sources" aria-current="page">Pending Sources</a>
+        <a href="#reported-comments">Reported Comments</a>
+      </nav>
+
+      <section class="queue-panel" id="pending-sources" aria-labelledby="pending-sources-title">
+        <form class="filter-panel" id="source-filters" action="#" method="get">
+          <h2>Filters</h2>
+          <label for="status-filter">Status</label>
+          <select id="status-filter" name="status">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="kept">Kept</option>
+            <option value="removed">Removed</option>
+            <option value="escalated">Escalated</option>
+          </select>
+
+          <label for="date-filter">Date Range</label>
+          <select id="date-filter" name="date">
+            <option value="30">Last 30 Days</option>
+            <option value="7">Last 7 Days</option>
+            <option value="90">Last 90 Days</option>
+            <option value="all">All Time</option>
+          </select>
+
+          <label for="type-filter">Type</label>
+          <select id="type-filter" name="type">
+            <option value="all">All Types</option>
+            <option value="Bill">Bill</option>
+            <option value="Article">Article</option>
+            <option value="Report">Report</option>
+            <option value="Other">Other</option>
+          </select>
+          <button id="clear-filters" type="reset">Clear Filters</button>
+        </form>
+
+        <section class="queue-table-panel" aria-labelledby="pending-sources-title">
+          <h2 id="pending-sources-title">Pending Sources Queue (<span id="queue-count">4</span>)</h2>
+          <table>
+            <caption>Sources waiting for moderator review</caption>
+            <thead>
+              <tr>
+                <th scope="col">Select</th>
+                <th scope="col">Date Submitted</th>
+                <th scope="col">Type</th>
+                <th scope="col">Title / Preview</th>
+                <th scope="col">Submitted By</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="source-queue">
+              <tr class="source-row" data-type="Bill" data-status="pending"
+                data-title="H.R. 1234 – Clean Energy Advancement Act"
+                data-source="https://www.congress.gov/bill/1234"
+                data-description="This bill aims to expand clean energy infrastructure and increase transparency in energy funding. It includes provisions for state grants and updated reporting requirements."
+                data-submitter="jdoe123" data-date="Apr 24, 2025 10:32 AM">
+                <td><input class="row-select" type="radio" name="selected-source"
+                  aria-label="Preview H.R. 1234 – Clean Energy Advancement Act" checked></td>
+                <td>Apr 24, 2025<br>10:32 AM</td>
+                <td>Bill</td>
+                <td><strong>H.R. 1234 – Clean Energy Advancement Act</strong><br>
+                  Source: congress.gov ...</td>
+                <td>jdoe123</td>
+                <td class="source-status">Pending</td>
+                <td>
+                  <form class="source-review-form" action="#" method="post">
+                    <input type="hidden" name="submission_id" value="1001">
+                    <button type="submit" name="decision" value="approve">Approve</button>
+                    <button type="submit" name="decision" value="reject">Reject</button>
+                    <button type="submit" name="decision" value="keep">Keep</button>
+                  </form>
+                </td>
+              </tr>
+              <tr class="source-row" data-type="Article" data-status="pending"
+                data-title="State lawmakers propose new transparency rules"
+                data-source="https://www.nytimes.com/"
+                data-description="An article describing proposed state-level transparency rules."
+                data-submitter="mlee" data-date="Apr 24, 2025 09:18 AM">
+                <td><input class="row-select" type="radio" name="selected-source"
+                  aria-label="Preview State lawmakers propose new transparency rules"></td>
+                <td>Apr 24, 2025<br>09:18 AM</td>
+                <td>Article</td>
+                <td><strong>State lawmakers propose new transparency...</strong><br>
+                  Source: nytimes.com ...</td>
+                <td>mlee</td>
+                <td class="source-status">Pending</td>
+                <td>
+                  <form class="source-review-form" action="#" method="post">
+                    <input type="hidden" name="submission_id" value="1002">
+                    <button type="submit" name="decision" value="approve">Approve</button>
+                    <button type="submit" name="decision" value="reject">Reject</button>
+                    <button type="submit" name="decision" value="keep">Keep</button>
+                  </form>
+                </td>
+              </tr>
+              <tr class="source-row" data-type="Report" data-status="pending"
+                data-title="2024 State Funding Overview"
+                data-source="https://www.govreport.gov/"
+                data-description="A report summarizing state funding and public spending."
+                data-submitter="sam89" data-date="Apr 23, 2025 03:45 PM">
+                <td><input class="row-select" type="radio" name="selected-source"
+                  aria-label="Preview 2024 State Funding Overview"></td>
+                <td>Apr 23, 2025<br>03:45 PM</td>
+                <td>Report</td>
+                <td><strong>2024 State Funding Overview</strong><br>
+                  Source: govreport.gov ...</td>
+                <td>sam89</td>
+                <td class="source-status">Pending</td>
+                <td>
+                  <form class="source-review-form" action="#" method="post">
+                    <input type="hidden" name="submission_id" value="1003">
+                    <button type="submit" name="decision" value="approve">Approve</button>
+                    <button type="submit" name="decision" value="reject">Reject</button>
+                    <button type="submit" name="decision" value="keep">Keep</button>
+                  </form>
+                </td>
+              </tr>
+              <tr class="source-row" data-type="Other" data-status="pending"
+                data-title="Local community meeting notes"
+                data-source="https://drive.google.com/"
+                data-description="Notes shared from a local community meeting."
+                data-submitter="taylor_k" data-date="Apr 22, 2025 11:07 AM">
+                <td><input class="row-select" type="radio" name="selected-source"
+                  aria-label="Preview Local community meeting notes"></td>
+                <td>Apr 22, 2025<br>11:07 AM</td>
+                <td>Other</td>
+                <td><strong>Local community meeting notes</strong><br>
+                  Source: drive.google.com ...</td>
+                <td>taylor_k</td>
+                <td class="source-status">Pending</td>
+                <td>
+                  <form class="source-review-form" action="#" method="post">
+                    <input type="hidden" name="submission_id" value="1004">
+                    <button type="submit" name="decision" value="approve">Approve</button>
+                    <button type="submit" name="decision" value="reject">Reject</button>
+                    <button type="submit" name="decision" value="keep">Keep</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="item-preview-panel" aria-labelledby="item-preview-heading">
+          <h2 id="item-preview-heading">Item Preview</h2>
+          <article>
+            <p><strong id="preview-type">Bill</strong></p>
+            <h3 id="preview-title">H.R. 1234 – Clean Energy Advancement Act</h3>
+            <p>Source: <a id="preview-source" href="https://www.congress.gov/bill/1234">https://www.congress.gov/bill/1234</a></p>
+            <p id="preview-description">This bill aims to expand clean energy infrastructure and increase transparency in energy funding. It includes provisions for state grants and updated reporting requirements.</p>
+            <hr>
+            <p><strong>Submitted by:</strong> <span id="preview-submitter">jdoe123</span></p>
+            <p><strong>Date Submitted:</strong> <span id="preview-date">Apr 24, 2025 10:32 AM</span></p>
+          </article>
+        </section>
+
+        <section class="moderation-notes-panel" aria-labelledby="moderation-notes-heading">
+          <h2 id="moderation-notes-heading">Moderation Notes</h2>
+          <label for="moderation-notes">Notes about this item (optional)</label>
+          <textarea id="moderation-notes" maxlength="1000"
+            placeholder="Add notes about this item (optional)..."></textarea>
+          <h3>Suggested Action</h3>
+          <button type="button" data-action="approve">Approve</button>
+          <button type="button" data-action="reject">Reject</button>
+          <button type="button" data-action="keep">Keep</button>
+          <button type="button" data-action="remove">Remove</button>
+          <button type="button" data-action="escalate">Escalate</button>
+          <hr>
+          <button id="suspend-user" type="button">Recommend Suspension to Admin</button>
+          <p>Use this if the user is repeatedly violating guidelines or submitting harmful content.</p>
+        </section>
+      </section>
+
+      <section class="queue-panel reported-comments-panel" id="reported-comments" aria-labelledby="reported-comments-title" hidden>
+        <h2 id="reported-comments-title">Reported Comments Queue</h2>
+        <table>
+          <caption>Comments reported by users</caption>
+          <thead>
+            <tr>
+              <th scope="col">Report ID</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2001</td>
+              <td>Sample reported comment</td>
+              <td>Inappropriate content</td>
+              <td class="comment-status">Pending</td>
+              <td>
+                <form class="comment-review-form" action="#" method="post">
+                  <input type="hidden" name="report_id" value="2001">
+                  <button type="submit" name="decision" value="dismiss">Dismiss Report</button>
+                  <button type="submit" name="decision" value="remove">Remove Comment</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p><a href="discussion.html">View bill discussions</a></p>
+
+        <section aria-labelledby="technical-issues-title">
+          <h2 id="technical-issues-title">Technical Issues</h2>
+          <table>
+            <caption>Technical issues submitted by users</caption>
+            <thead>
+              <tr>
+                <th scope="col">Issue ID</th>
+                <th scope="col">Page</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3001</td>
+                <td>Bill Details</td>
+                <td>Sample technical issue</td>
+                <td class="issue-status">Open</td>
+                <td>
+                  <form class="issue-status-form" action="#" method="post">
+                    <input type="hidden" name="issue_id" value="3001">
+                    <label for="issue-status-3001">Update status:</label>
+                    <select id="issue-status-3001" name="status">
+                      <option value="open">Open</option>
+                      <option value="in_progress">In Progress</option>
+                      <option value="resolved">Resolved</option>
+                    </select>
+                    <button type="submit">Save</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p><a href="report_issue.html">Open the report form</a></p>
+        </section>
+      </section>
+    </section>
+
+    <section class="recent-activity-panel" aria-labelledby="recent-activity-title">
+      <h2 id="recent-activity-title">Recent Moderation Activity</h2>
+      <table>
+        <caption>Recent moderator actions</caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Moderator</th>
+            <th scope="col">Action</th>
+            <th scope="col">Item</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="activity-log">
+          <tr><td>Apr 24, 2025 09:50 AM</td><td>You</td><td>Approved</td><td>Article – “Local elections see higher turnout...”</td><td>Accurate and relevant source.</td></tr>
+          <tr><td>Apr 23, 2025 04:12 PM</td><td>You</td><td>Removed</td><td>Comment – ID #88421</td><td>Violates community guidelines (harassment).</td></tr>
+          <tr><td>Apr 23, 2025 11:09 AM</td><td>You</td><td>Escalated</td><td>User – taylor_k</td><td>Repeated misinformation.</td></tr>
+          <tr><td>Apr 22, 2025 03:36 PM</td><td>You</td><td>Rejected</td><td>Source – “Unverified blog post”</td><td>Not a credible source.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="administrative-review-panel" aria-labelledby="administrative-review-title">
+      <h2 id="administrative-review-title">Administrative Review</h2>
+      <p>Issues requiring additional review can be escalated to an administrator.</p>
+      <p><a href="admin.html">Go to Admin Dashboard</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Legislative Accountability &amp; Constituent Engagement</p>
+  </footer>
+</body>
+</html>
