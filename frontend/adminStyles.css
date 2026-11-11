@@ -1,0 +1,428 @@
+:root {
+    color-scheme: light;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202124;
+    background: #f3f4f4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+        "users reports"
+        "escalations logs";
+    gap: 14px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+    background: #f3f4f4;
+    color: #202124;
+    font-size: 14px;
+}
+
+header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 2px 24px;
+    max-width: 1440px;
+    margin: 0 auto 18px;
+    padding: 22px 26px 20px;
+    border-bottom: 1px solid #bfc2c4;
+    background: #fff;
+}
+
+header h2 {
+    margin: 0;
+    font-size: 1.65rem;
+    font-weight: 700;
+}
+
+header p {
+    margin: 0;
+    color: #606367;
+}
+
+#metricsBoard {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #eceeef;
+}
+
+#metricsBoard table {
+    display: block;
+    width: 100%;
+    background: transparent;
+}
+
+#metricsBoard thead {
+    display: none;
+}
+
+#metricsBoard tbody,
+#metricsBoard tr {
+    display: block;
+}
+
+#metricsBoard tr {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+#metricsBoard td {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 13px 10px;
+    border: 0;
+    border-right: 1px solid #c8cbcd;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#metricsBoard td:last-child {
+    border-right: 0;
+}
+
+#metricsBoard td::after {
+    color: #64676a;
+    font-size: 0.78rem;
+    font-weight: 400;
+}
+
+#metricsBoard td:nth-child(1)::after {
+    content: "Total Users";
+}
+
+#metricsBoard td:nth-child(2)::after {
+    content: "Open Tickets";
+}
+
+#metricsBoard td:nth-child(3)::after {
+    content: "Pending Escalations";
+}
+
+#metricsBoard td:nth-child(4)::after {
+    content: "Active Moderators";
+}
+
+#adminUserManagement,
+#adminTechnicalReports,
+#moderatorEscalations,
+#siteLogsAndActivity {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #c9ccce;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+#adminUserManagement {
+    grid-area: users;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: start;
+    gap: 10px;
+}
+
+#adminTechnicalReports {
+    grid-area: reports;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: start;
+    gap: 10px;
+}
+
+#moderatorEscalations {
+    grid-area: escalations;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: start;
+    gap: 10px;
+}
+
+#siteLogsAndActivity {
+    grid-area: logs;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-content: start;
+    gap: 10px;
+}
+
+#adminUserManagement h3,
+#adminTechnicalReports h3,
+#moderatorEscalations::before,
+#siteLogsAndActivity::before {
+    align-self: center;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+#moderatorEscalations::before {
+    content: "Moderator Escalations";
+}
+
+#siteLogsAndActivity::before {
+    content: "Site Logs / Activity";
+}
+
+button,
+input,
+select {
+    min-height: 34px;
+    color: #292b2d;
+    font: inherit;
+}
+
+button {
+    padding: 6px 11px;
+    border: 1px solid #b7babd;
+    border-radius: 3px;
+    background: rgb(218 220 222 / 78%);
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d0d2d4;
+}
+
+input,
+select {
+    min-width: 0;
+    padding: 6px 9px;
+    border: 1px solid #bfc2c4;
+    border-radius: 3px;
+    background: #fff;
+}
+
+#adminUserManagement > input {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+#userFilters {
+    display: flex;
+    grid-column: 1 / -1;
+    gap: 8px;
+}
+
+#userFilters select {
+    flex: 1 1 0;
+}
+
+#userFilters button {
+    white-space: nowrap;
+}
+
+#adminTechnicalReports > ul,
+#moderatorEscalations > ul {
+    display: flex;
+    grid-column: 1 / -1;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #d5d7d9;
+    list-style: none;
+}
+
+#adminTechnicalReports > ul li,
+#moderatorEscalations > ul li {
+    margin: 0;
+}
+
+#adminTechnicalReports > ul a {
+    display: block;
+    padding: 8px 10px;
+    color: #53565a;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+#adminTechnicalReports > ul li:first-child a {
+    border-bottom: 2px solid #333;
+    color: #202124;
+    font-weight: 700;
+}
+
+#moderatorEscalations > ul button {
+    min-height: 36px;
+    padding: 7px 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #55585b;
+}
+
+#moderatorEscalations > ul li:first-child button {
+    border-bottom: 2px solid #333;
+    color: #202124;
+    font-weight: 700;
+}
+
+#userTable,
+#ticketTable,
+#escalationsTable,
+#siteLogsTable {
+    grid-column: 1 / -1;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th,
+td {
+    padding: 9px 10px;
+    border: 1px solid #d9dbdd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #eff0f1;
+    color: #343638;
+    font-size: 0.83rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+td {
+    font-size: 0.84rem;
+}
+
+#adminUserManagement > button:nth-last-child(-n + 2),
+#adminTechnicalReports > button:nth-last-child(-n + 2),
+#moderatorEscalations > button:nth-last-child(-n + 2),
+#siteLogsAndActivity > button:nth-last-child(-n + 2) {
+    min-width: 34px;
+    min-height: 30px;
+    padding: 4px 8px;
+}
+
+#adminUserManagement > button:nth-last-child(2),
+#adminTechnicalReports > button:nth-last-child(2),
+#moderatorEscalations > button:nth-last-child(2),
+#siteLogsAndActivity > button:nth-last-child(2) {
+    grid-column: 1;
+    justify-self: end;
+}
+
+#adminUserManagement > button:last-child,
+#adminTechnicalReports > button:last-child,
+#moderatorEscalations > button:last-child,
+#siteLogsAndActivity > button:last-child {
+    grid-column: 2;
+    justify-self: end;
+}
+
+#siteLogsAndActivity > select:first-of-type {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#siteLogsAndActivity > select:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#siteLogsAndActivity > button:first-of-type {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#siteLogsAndActivity > #siteLogsTable {
+    grid-row: 3;
+}
+
+@media (max-width: 900px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "users"
+            "reports"
+            "escalations"
+            "logs";
+    }
+
+    header {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 8px;
+    }
+
+    #metricsBoard {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        gap: 10px;
+        padding: 0 10px 12px;
+    }
+
+    header {
+        padding: 16px 14px;
+    }
+
+    #metricsBoard tr {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #metricsBoard td:nth-child(2) {
+        border-right: 0;
+    }
+
+    #metricsBoard td:nth-child(-n + 2) {
+        border-bottom: 1px solid #c8cbcd;
+    }
+
+    #adminUserManagement,
+    #adminTechnicalReports,
+    #moderatorEscalations,
+    #siteLogsAndActivity {
+        padding: 11px;
+    }
+
+    #userFilters {
+        flex-wrap: wrap;
+    }
+
+    #userFilters select {
+        flex-basis: calc(50% - 4px);
+    }
+
+    #userFilters button {
+        flex: 1 0 100%;
+    }
+
+    #siteLogsAndActivity {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    #siteLogsAndActivity > button:first-of-type {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: end;
+    }
+
+    #siteLogsAndActivity > #siteLogsTable {
+        grid-row: 3;
+    }
+}

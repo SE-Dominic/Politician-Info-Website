@@ -1,0 +1,275 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 2rem;
+    background-color: #f8f7f2;
+    color: #202124;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+.access-account-description {
+    max-width: 74rem;
+    margin: 0 auto 1rem;
+}
+
+.access-account-description h1 {
+    margin: 0 0 0.5rem;
+    color: #202124;
+}
+
+.access-account-description h3 {
+    max-width: 52rem;
+    margin: 0;
+    color: #606367;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+#accessTable {
+    width: 100%;
+    max-width: 76rem;
+    margin: 0 auto;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0.75rem;
+}
+
+#accessTable td {
+    width: 50%;
+    padding: 1.5rem;
+    vertical-align: top;
+    background-color: #fff;
+    border: 1px solid #c9ccce;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+#accessTable h3,
+#accessTable h4,
+#accessTable h5,
+#accessTable h6,
+#accessTable p {
+    margin-top: 0;
+}
+
+#accessTable h3,
+#accessTable h4 {
+    color: #202124;
+}
+
+#accessTable form label {
+    display: inline-block;
+    margin: 0.7rem 0 0.3rem;
+    color: #343638;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+#accessTable input:not([type="checkbox"]),
+#accessTable select {
+    display: block;
+    width: 100%;
+    min-height: 2.8rem;
+    margin: 0.15rem 0 0.55rem;
+    padding: 0.65rem 0.8rem;
+    color: #292b2d;
+    background-color: #fff;
+    border: 1px solid #bfc2c4;
+    border-radius: 3px;
+    font: inherit;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+#accessTable input:not([type="checkbox"]):focus,
+#accessTable select:focus {
+    border-color: #777a7c;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(96 99 103 / 16%);
+}
+
+#accessTable input::placeholder {
+    color: #777a7c;
+}
+
+#accessTable input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.4rem 0 0;
+    vertical-align: middle;
+    accent-color: #676a6c;
+}
+
+#accessTable ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#accessTable li {
+    padding: 0.85rem 1rem;
+    background-color: #f3f4f4;
+    border: 1px solid #d9dbdd;
+    border-radius: 3px;
+}
+
+#accessTable li p {
+    margin: 0;
+}
+
+#accessTable li strong {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: #343638;
+}
+
+#accessTable a {
+    color: #333638;
+}
+
+#accessTable a:hover {
+    color: #202124;
+}
+
+button {
+    margin-top: 0.6rem;
+    padding: 0.65rem 1rem;
+    color: #292b2d;
+    background-color: rgb(218 220 222 / 78%);
+    border: 1px solid #b7babd;
+    border-radius: 3px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+button:hover {
+    background-color: #d0d2d4;
+    border-color: #aeb1b3;
+}
+
+button:focus-visible,
+#accessTable a:focus-visible {
+    outline: 3px solid rgb(96 99 103 / 35%);
+    outline-offset: 2px;
+}
+
+@media (min-width: 761px) and (min-height: 700px) {
+    body {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 0.5rem;
+        height: 100vh;
+        height: 100dvh;
+        padding: 1rem 1.5rem;
+        overflow: hidden;
+    }
+
+    .access-account-description {
+        margin-bottom: 0;
+    }
+
+    .access-account-description h1 {
+        margin-bottom: 0.25rem;
+        font-size: 1.65rem;
+    }
+
+    .access-account-description h3 {
+        font-size: 0.95rem;
+    }
+
+    #accessTable {
+        height: 100%;
+        min-height: 0;
+        border-spacing: 0.5rem;
+    }
+
+    #accessTable td {
+        padding: 0.9rem;
+    }
+
+    #accessTable td > br {
+        display: none;
+    }
+
+    #accessTable h3,
+    #accessTable h4,
+    #accessTable h5,
+    #accessTable h6,
+    #accessTable p {
+        margin-bottom: 0.45rem;
+    }
+
+    #accessTable form {
+        display: grid;
+        grid-template-columns: minmax(7rem, 0.65fr) minmax(0, 1.35fr);
+        align-items: center;
+        gap: 0.3rem 0.65rem;
+    }
+
+    #accessTable form br {
+        display: none;
+    }
+
+    #accessTable form label {
+        margin: 0;
+        font-size: 0.85rem;
+    }
+
+    #accessTable input:not([type="checkbox"]),
+    #accessTable select {
+        min-height: 2.2rem;
+        margin: 0;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    #accessTable form a {
+        grid-column: 1;
+    }
+
+    #accessTable form button {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 0;
+        padding: 0.45rem 0.8rem;
+    }
+
+    #accessTable ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    #accessTable li {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 760px) {
+    body {
+        padding: 1rem;
+    }
+
+    #accessTable,
+    #accessTable tbody,
+    #accessTable tr,
+    #accessTable td {
+        display: block;
+        width: 100%;
+    }
+
+    #accessTable {
+        border-spacing: 0 0.75rem;
+    }
+
+    #accessTable td {
+        padding: 1.25rem;
+    }
+}
