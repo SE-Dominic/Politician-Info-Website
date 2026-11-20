@@ -4,32 +4,38 @@ declare(strict_types=1);
 const CONGRESS_API_BASE_URL = "https://api.congress.gov/v3";
 
 /**
- * Loads simple KEY=value entries from a local .env file.
+ * Loads environment variables from a .env file into the server environment.
  *
  * @param string $filePath Path to the .env file.
  * @return void
  */
 function loadEnvironmentFile(string $filePath): void
 {
+    # Checks if the .env file is readable and exists.
     if (!is_readable($filePath)) {
         return;
     }
 
     $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+    # Checks if file reading failed.
     if ($lines === false) {
         return;
     }
 
+    # Iterates over each line in .env file.
     foreach ($lines as $line) {
         $line = trim($line);
 
+        # Skips empty lines and comments.
         if ($line === "" || $line[0] === "#") {
             continue;
         }
 
+        # Finds position of the first '=' character.
         $separator = strpos($line, "=");
 
+        # Skips lines without an '=' character.
         if ($separator === false) {
             continue;
         }
@@ -37,6 +43,7 @@ function loadEnvironmentFile(string $filePath): void
         $name = trim(substr($line, 0, $separator));
         $value = trim(substr($line, $separator + 1));
 
+        # Removes surrounding quotes from the value if present.
         if (
             strlen($value) >= 2
             && (
@@ -47,6 +54,7 @@ function loadEnvironmentFile(string $filePath): void
             $value = substr($value, 1, -1);
         }
 
+        # Sets environment variable if not already set.
         if ($name !== "" && getenv($name) === false) {
             putenv($name . "=" . $value);
             $_ENV[$name] = $value;
@@ -55,11 +63,12 @@ function loadEnvironmentFile(string $filePath): void
     }
 }
 
+# Loads environment variables from .env file in backend folder  .
 loadEnvironmentFile(__DIR__ . "/../.env");
 
 
 /**
- * Reads the Congress.gov API key from the server environment.
+ * Checks and retrieves the Congress.gov API key from the server environment.
  *
  * @return string The configured API key.
  * @throws RuntimeException If the key is missing.
@@ -87,6 +96,7 @@ function getCongressApiKey(): string
  */
 function requestCongressAPI(string $endpoint, array $params = []): array
 {
+    # Ensures the cURL extension is available.
     if (!function_exists("curl_init")) {
         throw new RuntimeException("The PHP cURL extension is required.");
     }
@@ -133,6 +143,7 @@ function requestCongressAPI(string $endpoint, array $params = []): array
     $statusCode = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
 
+    # Checks if HTTP status code indicates an error.
     if ($statusCode < 200 || $statusCode >= 300) {
         $messages = [
             400 => "Bad Request. Check the request parameters.",
