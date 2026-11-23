@@ -1,4 +1,0 @@
-# PostgreSQL place holder
-
-## 
-

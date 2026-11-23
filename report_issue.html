@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report an Issue | LACE</title>
+  <link rel="stylesheet" href="report_issue.css">
+  <script src="report_issue.js" defer></script>
+</head>
+<body class="report-page">
+  <header class="site-header">
+    <a class="logo" href="home.html" aria-label="LACE home">LACE</a>
+    <p class="site-name">Legislative Accountability &amp; Constituent Engagement</p>
+
+    <nav aria-label="Main navigation">
+      <a href="home.html">Explore</a>
+      <a href="legislator.html">My Representatives</a>
+      <a href="bill_details.html">Issues</a>
+      <a href="access.html">Take Action</a>
+    </nav>
+
+    <form class="search-form" role="search" action="#" method="get">
+      <label for="site-search" class="visually-hidden">Search LACE</label>
+      <input id="site-search" type="search" name="q" placeholder="Search">
+    </form>
+    <a class="profile-link" href="access.html" aria-label="Account access">
+      <span class="profile-icon" aria-hidden="true"></span>
+    </a>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="home.html">Home</a>
+    <span aria-hidden="true">&gt;</span>
+    <a href="discussion.html">Comment Details</a>
+    <span aria-hidden="true">&gt;</span>
+    <span aria-current="page">Report an Issue</span>
+  </nav>
+
+  <main class="report-main">
+    <section class="report-panel" aria-labelledby="page-title">
+      <h1 id="page-title">Report an Issue</h1>
+      <p class="intro">
+        Help us keep LACE a respectful, accurate, and functional platform.
+        Let us know what’s wrong with this content or feature.
+      </p>
+
+      <p id="form-message" role="status" aria-live="polite"></p>
+
+      <form id="report-form" action="#" method="post">
+        <fieldset class="form-section">
+          <legend>1. What type of issue are you reporting?</legend>
+          <div class="issue-types">
+            <label class="issue-type">
+              <input type="radio" name="report_type" value="Content Report" checked required>
+              <span>
+                <strong>Content Report</strong>
+                Report inappropriate, misleading, or policy-violating content.
+              </span>
+            </label>
+            <label class="issue-type">
+              <input type="radio" name="report_type" value="Technical Issue" required>
+              <span>
+                <strong>Technical Issue</strong>
+                Report a bug, error, or technical problem with the platform.
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <section class="form-section" aria-labelledby="reported-item-heading">
+          <h2 class="section-heading" id="reported-item-heading">2. Item being reported</h2>
+          <article class="reported-item" aria-label="Comment by Alex R.">
+            <div class="avatar" aria-hidden="true">&#9679;</div>
+            <div>
+              <p><strong>Alex R.</strong></p>
+              <p class="posted-date">Posted on Apr 10, 2025</p>
+              <p class="comment">
+                I don’t think our representative cares about our community.
+                This bill is a total waste of time and only helps special interests.
+              </p>
+            </div>
+          </article>
+          <input type="hidden" name="reported_item" value="comment-88421">
+        </section>
+
+        <div class="form-section">
+          <label class="field-label" for="report-reason">3. Reason for report</label>
+          <select id="report-reason" name="reason" required>
+            <option value="" selected disabled>Select a reason...</option>
+            <option value="inappropriate-content">Inappropriate content</option>
+            <option value="misinformation">Misleading or inaccurate information</option>
+            <option value="harassment">Harassment or hate speech</option>
+            <option value="spam">Spam or irrelevant content</option>
+            <option value="bug">Bug or error</option>
+            <option value="broken-feature">Broken or unavailable feature</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-section">
+          <label class="field-label" for="additional-details">
+            4. Additional details <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            id="additional-details"
+            name="details"
+            maxlength="500"
+            aria-describedby="details-count"
+            placeholder="Provide any additional information that may help us review this report..."
+          ></textarea>
+          <p class="character-count" id="details-count" aria-live="polite">
+            <span id="character-count">0</span> / 500
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Submit Report</button>
+          <a class="button button-secondary" href="discussion.html">Cancel</a>
+        </div>
+      </form>
+    </section>
+
+    <aside class="next-steps" aria-labelledby="next-steps-heading">
+      <h2 id="next-steps-heading">ⓘ &nbsp; What happens next?</h2>
+      <dl>
+        <dt>Content Reports</dt>
+        <dd>
+          Content reports are sent to our moderation team for review. Our team
+          will evaluate the reported content against our community guidelines and
+          take appropriate action.
+        </dd>
+        <dt>Technical Issues</dt>
+        <dd>
+          Technical reports are sent to our administrative team for review. Our
+          team will investigate the issue and work to resolve it as soon as possible.
+        </dd>
+      </dl>
+    </aside>
+  </main>
+</body>
+</html>
