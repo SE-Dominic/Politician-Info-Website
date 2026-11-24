@@ -4,8 +4,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Profile</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="profileStyles.css">
 </head>
 <body>
+	<header class="site-header">
+		<nav>
+			<a href="home.html">Home</a>
+			<a href="legislator.html">Legislators</a>
+			<a href="bills.html">Bills</a>
+			<a href="discussion.html">Discussions</a>
+			<a href="compare.html">Compare</a>
+			<a href="profile.html" aria-current="page">Profile</a>
+			<a href="access.html">Login/Register</a>
+		</nav>
+	</header>
+	<main class="profile-layout">
     <div id="displayUserInfo">
         <h2><!--User first and last name here--></h2>
         <h6><!--When account was created (year)--></h6>
@@ -18,16 +32,16 @@
     </div>
     <div id="accountSettings">
         <h5><b>Update Password</b></h5>
-        <input type="text" id="currentPasswordInput" placeholder="Current Password">
+        <input type="password" id="currentPasswordInput" placeholder="Current Password">
         <br>
-        <input type="text" id="newPasswordInput" placeholder="New Password">
+        <input type="password" id="newPasswordInput" placeholder="New Password">
         <br>
-        <input type="text" id="confirmNewPasswordInput" placeholder="Confirm New Password">
+        <input type="password" id="confirmNewPasswordInput" placeholder="Confirm New Password">
         <hr>
         <button onclick="logoutUser()" id="logoutButton">Logout</button>
     </div>
     <div id="editUserProfile">
-        <label for="editProfileUserName">Username</label>
+        <label for="editProfileUsernameInput">Username</label>
         <input type="text" id="editProfileUsernameInput">
         <br>
         <label for="">State</label>
@@ -128,5 +142,6 @@
             </ul>
         </div>
     </div>
+	</main>
 </body>
 </html>

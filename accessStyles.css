@@ -4,48 +4,48 @@
 
 body {
     margin: 0;
-    padding: 2rem;
-    background-color: #f8f7f2;
-    color: #202124;
+    background-color: WhiteSmoke;
+    color: DarkSlateGray;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;
 }
 
 .access-account-description {
-    max-width: 74rem;
-    margin: 0 auto 1rem;
+    margin-bottom: 1.25rem;
+    padding: 2rem 2.5rem;
+    background-color: AliceBlue;
+    border: 1px solid Silver;
+    border-radius: 8px;
 }
 
 .access-account-description h1 {
     margin: 0 0 0.5rem;
-    color: #202124;
+    color: DarkSlateGray;
 }
 
 .access-account-description h3 {
     max-width: 52rem;
     margin: 0;
-    color: #606367;
+    color: DimGray;
     font-size: 1.05rem;
     font-weight: 400;
 }
 
 #accessTable {
     width: 100%;
-    max-width: 76rem;
     margin: 0 auto;
     table-layout: fixed;
     border-collapse: separate;
-    border-spacing: 0.75rem;
+    border-spacing: 1rem;
 }
 
 #accessTable td {
     width: 50%;
     padding: 1.5rem;
     vertical-align: top;
-    background-color: #fff;
-    border: 1px solid #c9ccce;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    background-color: White;
+    border: 1px solid Silver;
+    border-radius: 8px;
 }
 
 #accessTable h3,
@@ -58,13 +58,13 @@ body {
 
 #accessTable h3,
 #accessTable h4 {
-    color: #202124;
+    color: DarkSlateGray;
 }
 
 #accessTable form label {
     display: inline-block;
     margin: 0.7rem 0 0.3rem;
-    color: #343638;
+    color: DarkSlateGray;
     font-size: 0.92rem;
     font-weight: 600;
 }
@@ -76,23 +76,23 @@ body {
     min-height: 2.8rem;
     margin: 0.15rem 0 0.55rem;
     padding: 0.65rem 0.8rem;
-    color: #292b2d;
-    background-color: #fff;
-    border: 1px solid #bfc2c4;
-    border-radius: 3px;
+    color: DarkSlateGray;
+    background-color: White;
+    border: 1px solid Gray;
+    border-radius: 5px;
     font: inherit;
     transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 #accessTable input:not([type="checkbox"]):focus,
 #accessTable select:focus {
-    border-color: #777a7c;
+    border-color: Teal;
     outline: none;
-    box-shadow: 0 0 0 3px rgb(96 99 103 / 16%);
+    box-shadow: 0 0 0 3px rgb(0 128 128 / 16%);
 }
 
 #accessTable input::placeholder {
-    color: #777a7c;
+    color: DimGray;
 }
 
 #accessTable input[type="checkbox"] {
@@ -100,7 +100,7 @@ body {
     height: 1rem;
     margin: 0 0.4rem 0 0;
     vertical-align: middle;
-    accent-color: #676a6c;
+    accent-color: Teal;
 }
 
 #accessTable ul {
@@ -113,9 +113,9 @@ body {
 
 #accessTable li {
     padding: 0.85rem 1rem;
-    background-color: #f3f4f4;
-    border: 1px solid #d9dbdd;
-    border-radius: 3px;
+    background-color: AliceBlue;
+    border: 1px solid Silver;
+    border-radius: 5px;
 }
 
 #accessTable li p {
@@ -125,24 +125,24 @@ body {
 #accessTable li strong {
     display: block;
     margin-bottom: 0.2rem;
-    color: #343638;
+    color: DarkSlateGray;
 }
 
 #accessTable a {
-    color: #333638;
+    color: Teal;
 }
 
 #accessTable a:hover {
-    color: #202124;
+    color: MidnightBlue;
 }
 
 button {
     margin-top: 0.6rem;
     padding: 0.65rem 1rem;
-    color: #292b2d;
-    background-color: rgb(218 220 222 / 78%);
-    border: 1px solid #b7babd;
-    border-radius: 3px;
+    color: White;
+    background-color: Teal;
+    border: 1px solid Teal;
+    border-radius: 5px;
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -150,29 +150,20 @@ button {
 }
 
 button:hover {
-    background-color: #d0d2d4;
-    border-color: #aeb1b3;
+    background-color: MidnightBlue;
+    border-color: MidnightBlue;
 }
 
 button:focus-visible,
 #accessTable a:focus-visible {
-    outline: 3px solid rgb(96 99 103 / 35%);
+    outline: 3px solid rgb(0 128 128 / 35%);
     outline-offset: 2px;
 }
 
 @media (min-width: 761px) and (min-height: 700px) {
-    body {
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-        gap: 0.5rem;
-        height: 100vh;
-        height: 100dvh;
-        padding: 1rem 1.5rem;
-        overflow: hidden;
-    }
-
     .access-account-description {
-        margin-bottom: 0;
+        margin-bottom: 1rem;
+        padding: 1.25rem 1.5rem;
     }
 
     .access-account-description h1 {
@@ -185,7 +176,6 @@ button:focus-visible,
     }
 
     #accessTable {
-        height: 100%;
         min-height: 0;
         border-spacing: 0.5rem;
     }
@@ -253,10 +243,6 @@ button:focus-visible,
 }
 
 @media (max-width: 760px) {
-    body {
-        padding: 1rem;
-    }
-
     #accessTable,
     #accessTable tbody,
     #accessTable tr,

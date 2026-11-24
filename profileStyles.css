@@ -1,8 +1,8 @@
 :root {
     color-scheme: light;
     font-family: Arial, Helvetica, sans-serif;
-    color: #202124;
-    background: #f3f4f4;
+    color: DarkSlateGray;
+    background: WhiteSmoke;
 }
 
 * {
@@ -10,18 +10,20 @@
 }
 
 body {
+    margin: 0;
+    background: WhiteSmoke;
+    color: DarkSlateGray;
+    font-size: 14px;
+}
+
+.profile-layout {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(250px, 0.85fr);
     grid-template-areas:
         "profile settings"
         "edit edit"
         "history history";
-    gap: 12px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 14px;
-    background: #f3f4f4;
-    font-size: 14px;
+    gap: 16px;
 }
 
 #displayUserInfo,
@@ -29,10 +31,9 @@ body {
 #editUserProfile,
 #userHistorySection > div:not(:empty) {
     min-width: 0;
-    border: 1px solid #c9ccce;
-    border-radius: 3px;
-    background: #fff;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    border: 1px solid Silver;
+    border-radius: 8px;
+    background: White;
 }
 
 #displayUserInfo {
@@ -53,9 +54,9 @@ body {
     aspect-ratio: 1;
     border-radius: 50%;
     background:
-        radial-gradient(ellipse at 50% 42%, #666 0 22%, transparent 23%),
-        radial-gradient(ellipse at 50% 105%, #666 0 38%, transparent 39%),
-        #dedfe0;
+        radial-gradient(ellipse at 50% 42%, Teal 0 22%, transparent 23%),
+        radial-gradient(ellipse at 50% 105%, Teal 0 38%, transparent 39%),
+        AliceBlue;
     content: "";
 }
 
@@ -70,7 +71,7 @@ body {
     grid-column: 2;
     align-self: start;
     margin: 2px 0 8px;
-    color: #606367;
+    color: DimGray;
     font-size: 0.85rem;
     font-weight: 400;
 }
@@ -106,33 +107,35 @@ body {
     min-height: 34px;
     margin: 6px 0;
     padding: 7px 9px;
-    border: 1px solid #bfc2c4;
-    border-radius: 3px;
-    background: #fff;
+    border: 1px solid Gray;
+    border-radius: 5px;
+    background: White;
     font: inherit;
 }
 
 #accountSettings hr {
     margin: 12px 0;
     border: 0;
-    border-top: 1px solid #d5d7d9;
+    border-top: 1px solid Silver;
 }
 
 #accountSettings button,
 #editUserProfile button {
     min-height: 36px;
     padding: 7px 14px;
-    border: 1px solid #aeb1b3;
-    border-radius: 3px;
-    background: rgb(218 220 222 / 82%);
-    color: #202124;
+    border: 1px solid Teal;
+    border-radius: 5px;
+    background: Teal;
+    color: White;
     font: inherit;
+    font-weight: 600;
     cursor: pointer;
 }
 
 #accountSettings button:hover,
 #editUserProfile button:hover {
-    background: #d0d2d4;
+    background: MidnightBlue;
+    border-color: MidnightBlue;
 }
 
 #editUserProfile {
@@ -162,19 +165,27 @@ body {
     width: 100%;
     min-height: 34px;
     padding: 7px 9px;
-    border: 1px solid #bfc2c4;
-    border-radius: 3px;
-    background: #fff;
-    color: #292b2d;
+    border: 1px solid Gray;
+    border-radius: 5px;
+    background: White;
+    color: DarkSlateGray;
     font: inherit;
 }
 
-#editUserProfile label[for="editProfileUserName"],
+#accountSettings input:focus,
+#editUserProfile input:focus,
+#editUserProfile select:focus {
+    border-color: Teal;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(0 128 128 / 16%);
+}
+
+#editUserProfile label[for="editProfileUsernameInput"],
 #editUserProfile label[for="editProfileDistrict"] {
     grid-column: 1;
 }
 
-#editUserProfile label[for="editProfileUserName"] {
+#editUserProfile label[for="editProfileUsernameInput"] {
     grid-row: 2;
 }
 
@@ -218,12 +229,12 @@ body {
     justify-self: start;
     min-width: 130px;
     margin-top: 10px;
-    background: #676a6c;
-    color: #fff;
+    background: Teal;
+    color: White;
 }
 
 #editUserProfile button:hover {
-    background: #515456;
+    background: MidnightBlue;
 }
 
 #userHistorySection {
@@ -240,9 +251,9 @@ body {
 #userHistorySection > div {
     min-width: 0;
     padding: 12px;
-    border: 1px solid #c9ccce;
-    border-radius: 3px;
-    background: #fff;
+    border: 1px solid Silver;
+    border-radius: 8px;
+    background: White;
 }
 
 #userHistorySection h3 {
@@ -253,7 +264,7 @@ body {
 
 #userHistorySection a {
     float: right;
-    color: #333638;
+    color: Teal;
     font-weight: 600;
     text-decoration: underline;
 }
@@ -267,7 +278,7 @@ body {
     clear: both;
     margin: 0 0 5px;
     border: 0;
-    border-top: 1px solid #d5d7d9;
+    border-top: 1px solid Silver;
 }
 
 #userHistorySection ul {
@@ -279,7 +290,7 @@ body {
 #userHistorySection li {
     min-height: 32px;
     padding: 7px 4px;
-    border-bottom: 1px solid #e0e1e2;
+    border-bottom: 1px solid WhiteSmoke;
 }
 
 #userHistorySection li:last-child {
@@ -287,7 +298,7 @@ body {
 }
 
 @media (max-width: 700px) {
-    body {
+    .profile-layout {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "profile"
@@ -302,10 +313,6 @@ body {
 }
 
 @media (max-width: 440px) {
-    body {
-        padding: 9px;
-    }
-
     #displayUserInfo {
         grid-template-columns: 76px minmax(0, 1fr);
         column-gap: 12px;
