@@ -56,8 +56,8 @@ function laceSetting(string $name, ?string $default = null): ?string
 function connectLaceDatabase(): mysqli
 {
     $host = "localhost";
-    $user = "Group2";
-    $password = "p7zcoebv"; // Enter the current Group2 MySQL password here before uploading.
+    $user = "root";
+    $password = "Vampyre2026"; // Enter the current Group2 MySQL password here before uploading.
     $port = 3306;
     $database = "Group2";
     if ($password === "") {
