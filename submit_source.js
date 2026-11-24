@@ -1,23 +1,36 @@
 /* =========================================================
    LACE - submit_source.html script
-   Source submission form validation.
-   Front-end behavior only. Nothing is saved to a server yet;
-   the TODO comments mark where backend/API calls will go.
+   Validates the form, then POSTs the source to participation.php
+   (status defaults to 'pending' for moderator review).
+   The bill is identified by ?congress=&type=&number= in the URL
+   (carried over from the "Submit Source" button on bill_details),
+   falling back to the demo bill 118/HR/123.
    ========================================================= */
-
-// Everything below runs in its own scope, so these names can't
-// clash with other scripts on the site.
 (function () {
   "use strict";
 
+  var params = new URLSearchParams(location.search);
+  var bill = {
+    congress: params.get("congress") || "118",
+    type: (params.get("type") || "HR").toUpperCase(),
+    number: params.get("number") || "123"
+  };
+  var billQuery = "congress=" + encodeURIComponent(bill.congress) +
+                  "&type=" + encodeURIComponent(bill.type) +
+                  "&number=" + encodeURIComponent(bill.number);
+
   document.addEventListener("DOMContentLoaded", setupSourceForm);
 
-  /* ---------------------------------------------------------
-     submit_source.html - form validation
-     --------------------------------------------------------- */
   function setupSourceForm() {
     var form = document.getElementById("source-form");
     if (!form) return;
+
+    // Keep the Cancel / Back links pointed at the same bill.
+    var cancelLink = document.getElementById("cancel-btn");
+    if (cancelLink) cancelLink.href = "bill_details.html?" + billQuery;
+    document.querySelectorAll('#success-notice a[href="bill_details.html"]').forEach(function (a) {
+      a.href = "bill_details.html?" + billQuery;
+    });
 
     var rules = {
       "linked-item": function (v) { return v.trim() !== ""; },
@@ -35,7 +48,6 @@
       return valid;
     }
 
-    // Clear an error as soon as the user fixes the field
     Object.keys(rules).forEach(function (id) {
       var input = document.getElementById(id);
       input.addEventListener("input", function () {
@@ -46,6 +58,8 @@
       });
     });
 
+    var submitBtn = form.querySelector('button[type="submit"]');
+
     form.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -53,17 +67,45 @@
       Object.keys(rules).forEach(function (id) {
         if (!check(id) && !firstBad) firstBad = id;
       });
-
       if (firstBad) {
         document.getElementById(firstBad).focus();
         return;
       }
 
-      // TODO: send the form data to the backend, e.g. POST /api/sources
-      document.getElementById("source-form-card").hidden = true;
-      document.getElementById("review-notice").hidden = true;
-      document.getElementById("success-notice").hidden = false;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Submitting..."; }
+
+      var body = new URLSearchParams({
+        action: "source_add",
+        congress: bill.congress,
+        type: bill.type,
+        number: bill.number,
+        source_type: document.getElementById("source-type").value,
+        cited_claim: document.getElementById("cited-claim").value.trim(),
+        url: document.getElementById("source-url").value.trim(),
+        notes: document.getElementById("notes").value.trim()
+      });
+
+      fetch("participation.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body
+      })
+        .then(function (response) {
+          return response.json().then(function (result) {
+            if (!response.ok) throw new Error(result.error || "Submission failed.");
+            return result.data;
+          });
+        })
+        .then(function () {
+          document.getElementById("source-form-card").hidden = true;
+          document.getElementById("review-notice").hidden = true;
+          document.getElementById("success-notice").hidden = false;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        })
+        .catch(function (err) {
+          alert("Could not submit the source: " + err.message);
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Submit Source"; }
+        });
     });
 
     var cancel = document.getElementById("cancel-btn");
