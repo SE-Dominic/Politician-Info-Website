@@ -1,67 +1,96 @@
 /* =========================================================
    LACE - bill_details.html script
-   Support / Oppose feedback buttons.
-   Front-end behavior only. Nothing is saved to a server yet;
-   the TODO comments mark where backend/API calls will go.
+   Support / Oppose feedback, wired to participation.php.
+   The bill is identified by ?congress=&type=&number= in the URL;
+   if those are absent it falls back to the demo bill 118/HR/123
+   so the page still works standalone.
    ========================================================= */
-
-// Everything below runs in its own scope, so these names can't
-// clash with other scripts on the site.
 (function () {
   "use strict";
 
+  // ----- bill context from the URL (demo fallback) -----
+  var params = new URLSearchParams(location.search);
+  var bill = {
+    congress: params.get("congress") || "118",
+    type: (params.get("type") || "HR").toUpperCase(),
+    number: params.get("number") || "123"
+  };
+  var billQuery = "congress=" + encodeURIComponent(bill.congress) +
+                  "&type=" + encodeURIComponent(bill.type) +
+                  "&number=" + encodeURIComponent(bill.number);
+
+  // ----- tiny API helpers -----
+  function apiGet(action) {
+    return fetch("participation.php?action=" + action + "&" + billQuery, { cache: "no-store" })
+      .then(readData);
+  }
+  function apiPost(action, fields) {
+    var body = new URLSearchParams(Object.assign({ action: action, congress: bill.congress, type: bill.type, number: bill.number }, fields));
+    return fetch("participation.php", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body })
+      .then(readData);
+  }
+  function readData(response) {
+    return response.json().then(function (result) {
+      if (!response.ok) throw new Error(result.error || "Request failed.");
+      return result.data;
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", setupBillFeedback);
 
-  /* ---------------------------------------------------------
-     bill_details.html - Support / Oppose buttons
-     --------------------------------------------------------- */
   function setupBillFeedback() {
     var supportBtn = document.getElementById("support-btn");
     var opposeBtn = document.getElementById("oppose-btn");
     if (!supportBtn || !opposeBtn) return;
 
-    var supportEl = document.getElementById("support-count");
-    var opposeEl = document.getElementById("oppose-count");
-    var baseSupport = Number(supportEl.dataset.count);
-    var baseOppose = Number(opposeEl.dataset.count);
-    var choice = null; // null, "support", or "oppose"
+    // Carry the bill identity onto the Join Discussion / Submit Source links.
+    document.querySelectorAll('a[href="discussion.html"], a[href="submit_source.html"]').forEach(function (a) {
+      a.href = a.getAttribute("href") + "?" + billQuery;
+    });
 
-    function render() {
-      var support = baseSupport + (choice === "support" ? 1 : 0);
-      var oppose = baseOppose + (choice === "oppose" ? 1 : 0);
+    var statusEl = document.getElementById("vote-status");
+    var busy = false;
+
+    function render(data) {
+      var support = Number(data.support) || 0;
+      var oppose = Number(data.oppose) || 0;
       var total = support + oppose;
-      var supportPct = Math.round((support / total) * 100);
-      var opposePct = 100 - supportPct;
+      var supportPct = total ? Math.round((support / total) * 100) : 0;
+      var opposePct = total ? 100 - supportPct : 0;
 
-      supportEl.textContent = support.toLocaleString();
-      opposeEl.textContent = oppose.toLocaleString();
+      document.getElementById("support-count").textContent = support.toLocaleString();
+      document.getElementById("oppose-count").textContent = oppose.toLocaleString();
       document.getElementById("support-pct").textContent = supportPct + "%";
       document.getElementById("oppose-pct").textContent = opposePct + "%";
       document.getElementById("support-bar").style.width = supportPct + "%";
       document.getElementById("oppose-bar").style.width = opposePct + "%";
 
-      // Default look (no choice) matches the mockup: Support is the dark button.
+      var choice = data.myPosition; // "support", "oppose", or null
       supportBtn.classList.toggle("btn-primary", choice !== "oppose");
       opposeBtn.classList.toggle("btn-primary", choice === "oppose");
       supportBtn.setAttribute("aria-pressed", choice === "support");
       opposeBtn.setAttribute("aria-pressed", choice === "oppose");
 
-      var status = document.getElementById("vote-status");
-      if (choice === "support") status.textContent = "You support this bill. Click again to remove your vote.";
-      else if (choice === "oppose") status.textContent = "You oppose this bill. Click again to remove your vote.";
-      else status.textContent = "";
+      if (choice === "support") statusEl.textContent = "You support this bill. Click again to remove your vote.";
+      else if (choice === "oppose") statusEl.textContent = "You oppose this bill. Click again to remove your vote.";
+      else statusEl.textContent = "";
     }
 
-    function choose(position) {
-      choice = (choice === position) ? null : position;
-      render();
-      // TODO: send choice to the backend, e.g. POST /api/bills/HB123/feedback
+    function vote(position) {
+      if (busy) return;
+      busy = true;
+      apiPost("feedback_set", { position: position })
+        .then(render)
+        .catch(function (err) { statusEl.textContent = err.message; })
+        .finally(function () { busy = false; });
     }
 
-    supportBtn.addEventListener("click", function () { choose("support"); });
-    opposeBtn.addEventListener("click", function () { choose("oppose"); });
+    supportBtn.addEventListener("click", function () { vote("support"); });
+    opposeBtn.addEventListener("click", function () { vote("oppose"); });
 
-    // Draw the counts, percentages and bar widths from the data on page load
-    render();
+    // Load the real counts for this bill on page open.
+    apiGet("feedback")
+      .then(render)
+      .catch(function (err) { statusEl.textContent = "Could not load feedback: " + err.message; });
   }
 })();
