@@ -700,7 +700,7 @@ function houseBallots_UPDATE(mysqli $DBConnect, int $congress, int $houseSession
     }
     $votes = [];
     foreach ($rows as $ballot) {
-        $id = bioguideKey($ballot["bioguideId"] ?? "");
+        $id = bioguideKey($ballot["bioguideID"] ?? $ballot["bioguideId"] ?? "");
         if (isset($votes[$id]) || trim($ballot["voteCast"] ?? "") === "") {
             throw new RuntimeException("Repeated voter or missing voteCast.");
         }
