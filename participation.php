@@ -5,6 +5,15 @@
  * Owned by Nathan: backs bill_details.html, submit_source.html, discussion.html.
  * Reuses the team's connection and prepared-statement helpers in laceDatabase.php.
  *
+ * Schema notes (matches the deployed Group2 database):
+ *   - bill_feedback is keyed by (congress, billType, billNumber, user_id).
+ *   - sources is keyed by source_id and references a bill by (congress, billType, billNumber).
+ *   - comments hang off a DISCUSSION (discussions.discussion_id), not a bill directly.
+ *     A discussion row carries the bill identity (congress, billType, billNumber), so
+ *     these endpoints take a bill key and find-or-create that bill's discussion.
+ *   - comments use parent_comment_id (exposed to the browser as parent_id) and edited_at,
+ *     and are soft-deleted (status='removed') to match the comments/ discussions design.
+ *
  * Reads (GET ?action=):   feedback, comments
  * Writes (POST action=):  feedback_set, source_add, comment_add,
  *                         comment_edit, comment_delete, like_toggle
@@ -110,18 +119,58 @@ function feedbackPayload(mysqli $db, array $key, int $uid): array
     ];
 }
 
-/** Reads the visible comment thread for one bill, newest activity first in JS. */
-function commentsPayload(mysqli $db, array $key, int $uid): array
+/**
+ * Finds the discussion row for a bill, optionally creating one.
+ *
+ * Comments belong to a discussion, and a discussion carries the bill identity.
+ * Since no discussions-listing/creation flow exists yet, the first person to
+ * comment on a bill starts its discussion here.
+ *
+ * @return int|null The discussion_id, or null when none exists and create=false.
+ */
+function billDiscussionId(mysqli $db, array $key, int $uid, bool $create): ?int
 {
     $rows = laceRows_SELECT(
         $db,
-        "SELECT c.comment_id, c.parent_id, c.user_id, u.username AS author, c.body, c.created_at,
+        "SELECT discussion_id FROM discussions
+         WHERE congress=? AND billType=? AND billNumber=?
+         ORDER BY (status='open') DESC, discussion_id ASC LIMIT 1",
+        [$key["congress"], $key["type"], $key["number"]],
+    );
+    if ($rows) {
+        return (int) $rows[0]["discussion_id"];
+    }
+    if (!$create) {
+        return null;
+    }
+    $title = "Discussion: " . $key["type"] . " " . $key["number"];
+    $statement = executeLaceStatement(
+        $db,
+        "INSERT INTO discussions (created_by, title, congress, billType, billNumber, status)
+         VALUES (?,?,?,?,?, 'open')",
+        [$uid, $title, $key["congress"], $key["type"], $key["number"]],
+    );
+    $id = $db->insert_id;
+    $statement->close();
+    return $id;
+}
+
+/** Reads the visible comment thread for a discussion (parent_comment_id exposed as parent_id). */
+function commentsPayload(mysqli $db, ?int $discussionId, int $uid): array
+{
+    if ($discussionId === null) {
+        return ["items" => []]; // no discussion started for this bill yet
+    }
+    $rows = laceRows_SELECT(
+        $db,
+        "SELECT c.comment_id, c.parent_comment_id AS parent_id, c.user_id,
+                u.username AS author, c.body, c.created_at,
                 (SELECT COUNT(*) FROM comment_likes k WHERE k.comment_id = c.comment_id) AS like_count,
                 EXISTS(SELECT 1 FROM comment_likes k2 WHERE k2.comment_id = c.comment_id AND k2.user_id = ?) AS liked
          FROM comments c JOIN users u ON u.user_id = c.user_id
-         WHERE c.congress=? AND c.billType=? AND c.billNumber=? AND c.status='visible'
-         ORDER BY c.created_at ASC",
-        [$uid, $key["congress"], $key["type"], $key["number"]],
+         WHERE c.discussion_id = ? AND c.status = 'visible'
+         ORDER BY c.created_at ASC, c.comment_id ASC",
+        [$uid, $discussionId],
     );
     $items = [];
     foreach ($rows as $row) {
@@ -139,16 +188,38 @@ function commentsPayload(mysqli $db, array $key, int $uid): array
     return ["items" => $items];
 }
 
-/** Confirms the comment belongs to this user, or throws. */
-function requireCommentOwner(mysqli $db, int $commentId, int $uid): void
+/** Confirms the comment belongs to this user; returns its discussion_id. */
+function requireCommentOwner(mysqli $db, int $commentId, int $uid): int
 {
-    $rows = laceRows_SELECT($db, "SELECT user_id FROM comments WHERE comment_id=?", [$commentId]);
+    $rows = laceRows_SELECT($db, "SELECT user_id, discussion_id FROM comments WHERE comment_id=?", [$commentId]);
     if (!$rows) {
         throw new OutOfBoundsException("Comment not found.");
     }
     if ((int) $rows[0]["user_id"] !== $uid) {
         throw new RuntimeException("You can only change your own comment.");
     }
+    return (int) $rows[0]["discussion_id"];
+}
+
+/** Soft-deletes a comment and every reply beneath it (status='removed'). */
+function softDeleteSubtree(mysqli $db, int $rootId): void
+{
+    $ids = [$rootId];
+    $frontier = [$rootId];
+    while ($frontier) {
+        $marks = implode(",", array_fill(0, count($frontier), "?"));
+        $children = laceRows_SELECT(
+            $db,
+            "SELECT comment_id FROM comments WHERE status='visible' AND parent_comment_id IN ($marks)",
+            $frontier,
+        );
+        $frontier = array_map(fn($r) => (int) $r["comment_id"], $children);
+        foreach ($frontier as $cid) {
+            $ids[] = $cid;
+        }
+    }
+    $marks = implode(",", array_fill(0, count($ids), "?"));
+    participationWrite($db, "UPDATE comments SET status='removed' WHERE comment_id IN ($marks)", $ids);
 }
 
 /**
@@ -228,9 +299,10 @@ function participationAction(mysqli $db): mixed
             $statement->close();
             return ["source_id" => $id, "status" => "pending"];
 
-        // ---- discussion.html ---------------------------------------
+        // ---- discussion.html (comments live under a discussion) ----
         case "comments": // GET
-            return commentsPayload($db, requestBillKey(), $uid);
+            $discussionId = billDiscussionId($db, requestBillKey(), $uid, false);
+            return commentsPayload($db, $discussionId, $uid);
 
         case "comment_add": // POST  body, parent_id?
             requirePost();
@@ -242,34 +314,41 @@ function participationAction(mysqli $db): mixed
             if (mb_strlen($body) > 1000) {
                 throw new InvalidArgumentException("A comment must be 1000 characters or fewer.");
             }
-            $parentRaw = reqValue("parent_id");
-            $parentId = null;
-            if ($parentRaw !== null && $parentRaw !== "") {
-                $parentId = (int) $parentRaw;
-                $parent = laceRows_SELECT($db, "SELECT comment_id FROM comments WHERE comment_id=?", [$parentId]);
-                if (!$parent) {
-                    throw new OutOfBoundsException("Parent comment not found.");
+            return inLaceTransaction($db, function () use ($db, $key, $uid, $body) {
+                $discussionId = billDiscussionId($db, $key, $uid, true);
+                $parentRaw = reqValue("parent_id");
+                $parentId = null;
+                if ($parentRaw !== null && $parentRaw !== "") {
+                    $parentId = (int) $parentRaw;
+                    $parent = laceRows_SELECT(
+                        $db,
+                        "SELECT discussion_id FROM comments WHERE comment_id=? AND status='visible'",
+                        [$parentId],
+                    );
+                    if (!$parent || (int) $parent[0]["discussion_id"] !== $discussionId) {
+                        throw new OutOfBoundsException("Parent comment not found in this discussion.");
+                    }
                 }
-            }
-            $statement = executeLaceStatement(
-                $db,
-                "INSERT INTO comments (congress, billType, billNumber, user_id, parent_id, body)
-                 VALUES (?,?,?,?,?,?)",
-                [$key["congress"], $key["type"], $key["number"], $uid, $parentId, $body],
-            );
-            $id = $db->insert_id;
-            $statement->close();
-            $username = laceRows_SELECT($db, "SELECT username FROM users WHERE user_id=?", [$uid]);
-            return [
-                "comment_id" => $id,
-                "parent_id" => $parentId,
-                "author" => $username[0]["username"] ?? "You",
-                "body" => $body,
-                "created_at" => date("Y-m-d H:i:s"),
-                "like_count" => 0,
-                "liked" => false,
-                "mine" => true,
-            ];
+                $statement = executeLaceStatement(
+                    $db,
+                    "INSERT INTO comments (discussion_id, user_id, parent_comment_id, body)
+                     VALUES (?,?,?,?)",
+                    [$discussionId, $uid, $parentId, $body],
+                );
+                $id = $db->insert_id;
+                $statement->close();
+                $username = laceRows_SELECT($db, "SELECT username FROM users WHERE user_id=?", [$uid]);
+                return [
+                    "comment_id" => $id,
+                    "parent_id" => $parentId,
+                    "author" => $username[0]["username"] ?? "You",
+                    "body" => $body,
+                    "created_at" => date("Y-m-d H:i:s"),
+                    "like_count" => 0,
+                    "liked" => false,
+                    "mine" => true,
+                ];
+            });
 
         case "comment_edit": // POST  comment_id, body
             requirePost();
@@ -278,15 +357,24 @@ function participationAction(mysqli $db): mixed
             if ($body === "") {
                 throw new InvalidArgumentException("A comment cannot be empty.");
             }
+            if (mb_strlen($body) > 1000) {
+                throw new InvalidArgumentException("A comment must be 1000 characters or fewer.");
+            }
             requireCommentOwner($db, $commentId, $uid);
-            participationWrite($db, "UPDATE comments SET body=? WHERE comment_id=? AND user_id=?", [$body, $commentId, $uid]);
+            participationWrite(
+                $db,
+                "UPDATE comments SET body=?, edited_at=NOW() WHERE comment_id=? AND user_id=?",
+                [$body, $commentId, $uid],
+            );
             return ["comment_id" => $commentId, "body" => $body];
 
-        case "comment_delete": // POST  comment_id
+        case "comment_delete": // POST  comment_id  (soft delete: status='removed')
             requirePost();
             $commentId = reqInt("comment_id", 1, PHP_INT_MAX);
             requireCommentOwner($db, $commentId, $uid);
-            participationWrite($db, "DELETE FROM comments WHERE comment_id=? AND user_id=?", [$commentId, $uid]);
+            inLaceTransaction($db, function () use ($db, $commentId) {
+                softDeleteSubtree($db, $commentId);
+            });
             return ["deleted" => $commentId];
 
         case "like_toggle": // POST  comment_id
